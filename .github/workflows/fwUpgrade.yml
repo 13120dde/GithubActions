@@ -1,72 +1,37 @@
-name: Cache Example
+name: ACA Firmware Upgrade
 
 on: push
-
-
-
+    #schedule:
+    #    - cron: '0 0 * * 6'
 
 jobs:
-  cache-build:
-    name: Build - With Cache
-    runs-on: ubuntu-latest
-
+  get-devices-to-upgrade:
+    name: Get devices to upgrade
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Get Devices
+        shell: pwsh
+        run: |
+          ./Scripts/GetDevices.ps1
+      - name: Upload Device info
+        uses: actions/upload-artifact@v2
         with:
-          node-version: 12
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/cache@v2
-        id: restore-build
-        with:
-          path: ./*
-          key: ${{ github.sha }}
+          name: deviceInfo
+          path: /Scripts/devices/deviceInfo.json
 
-  cache-use-build:
-    name: Re-use Cache
-    runs-on: ubuntu-latest
-    needs: [cache-build]
-
+  upgrade-devices:
+    name: Upgrade Devices
+    needs: get-devices-to-upgrade
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Download deviceInfo artifact
+        uses: actions/download-artifact@v2
         with:
-          node-version: 12
-      - uses: actions/cache@v2
-        id: restore-build
-        with:
-          path: ./*
-          key: ${{ github.sha }}
-      - run: ls .next
-
-  artifact-build:
-    name: Build - With Artifact
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-artifact@v2
-        with:
-          name: nextjs-build
-          path: ./.next
-
-  artifact-use-build:
-    name: Re-use Artifact
-    runs-on: ubuntu-latest
-    needs: [artifact-build]
-
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - uses: actions/download-artifact@v2
-        with:
-          name: nextjs-build
-      - run: ls .
+          name: deviceInfo
+      
+      - name: Upgrade devices
+        shell: pwsh
+        run: |
+          value=`cat deviceInfo.json`
+          ./Scripts/UpgradeDevice.ps1 value
+      
