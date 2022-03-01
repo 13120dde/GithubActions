@@ -1,13 +1,13 @@
-name: Run 2 Scripts Scheduled
-on: 
-	schedule:
-		- cron '55/10 * * * *'
-        
+name: "Close stale issues"
+on:
+  schedule:
+  - cron: "0/5 * * * *"
+
 jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: Run first script
-        uses: actions/checkout@v2       		
+      - name: Check out repo        
+        uses: actions/checkout@v2
       - run: |
           ./Scripts/SecondScript.ps1
