@@ -33,6 +33,6 @@ jobs:
           name: deviceInfo
       
       - run: |
-          
-          ./Scripts/UpgradeDevice.ps1 deviceInfo.json
+          fileName='deviceInfo.json'
+          ./Scripts/UpgradeDevice.ps1 "${fileName}"
       
