@@ -1,0 +1,14 @@
+name: Run 2 Scripts Scheduled
+on: 
+	schedule:
+		-cron '50/10 * * * *'
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Run first script
+        uses: actions/checkout@v2
+      - run: |
+          ./Scripts/FirstScript.ps1		  		
+      - run: |
+          ./Scripts/SecondScript.ps1
