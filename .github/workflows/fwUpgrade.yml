@@ -33,6 +33,6 @@ jobs:
           name: deviceInfo
       
       - run: |
-          value=`cat deviceInfo.json`
-          ./Scripts/UpgradeDevice.ps1 value
+          
+          ./Scripts/UpgradeDevice.ps1 deviceInfo.json
       
