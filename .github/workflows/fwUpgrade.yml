@@ -1,9 +1,9 @@
-on:
-  push:
-    branches: [main]
-
-
 name: Cache Example
+
+on: push
+
+
+
 
 jobs:
   cache-build:
