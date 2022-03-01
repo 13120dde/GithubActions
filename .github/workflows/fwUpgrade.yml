@@ -9,10 +9,12 @@ jobs:
     name: Get devices to upgrade
     runs-on: windows-latest
     steps:
-      - name: Get Devices
-        shell: pwsh
-        run: |
+      - name: Check out repo        
+            uses: actions/checkout@v2
+            
+      - run: |
           ./Scripts/GetDevices.ps1
+      
       - name: Upload Device info
         uses: actions/upload-artifact@v2
         with:
@@ -29,9 +31,7 @@ jobs:
         with:
           name: deviceInfo
       
-      - name: Upgrade devices
-        shell: pwsh
-        run: |
+      - run: |
           value=`cat deviceInfo.json`
           ./Scripts/UpgradeDevice.ps1 value
       
