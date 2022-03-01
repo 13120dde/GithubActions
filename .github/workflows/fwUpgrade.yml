@@ -19,7 +19,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: deviceInfo
-          path: /Scripts/devices/deviceInfo.json
+          path: deviceInfo.json
+                
 
   upgrade-devices:
     name: Upgrade Devices
