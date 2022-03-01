@@ -1,0 +1,85 @@
+name: Firmware Upgrade
+
+on: push
+
+jobs: 
+
+    super-lint:
+        name: Lint code base
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v2
+
+          - name: Run Super-linter
+            uses: github/super-linter@v3.17.0
+            env:
+              DEFAULT_BRANCH: main
+              GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+              
+    cache-build:
+        name: Build - With Cache
+        runs-on: ubuntu-latest
+
+        steps:
+          - uses: actions/checkout@v2
+          - uses: actions/setup-node@v1
+            with:
+              node-version: 12
+          - run: npm ci
+          - run: npm run build
+          - uses: actions/cache@v2
+            id: restore-build
+            with:
+              path: ./*
+              key: ${{ github.sha }}
+
+    cache-use-build:
+        name: Re-use Cache
+        runs-on: ubuntu-latest
+        needs: [cache-build]
+
+        steps:
+          - uses: actions/checkout@v2
+          - uses: actions/setup-node@v1
+            with:
+              node-version: 12
+          - uses: actions/cache@v2
+            id: restore-build
+            with:
+              path: ./*
+              key: ${{ github.sha }}
+          - run: ls .next
+
+    artifact-build:
+        name: Build - With Artifact
+        runs-on: ubuntu-latest
+
+        steps:
+          - uses: actions/checkout@v2
+          - uses: actions/setup-node@v1
+            with:
+              node-version: 12
+          - run: npm ci
+          - run: npm run build
+          - uses: actions/upload-artifact@v2
+            with:
+              name: nextjs-build
+              path: ./.next
+
+    artifact-use-build:
+        name: Re-use Artifact
+        runs-on: ubuntu-latest
+        needs: [artifact-build]
+
+        steps:
+          - uses: actions/checkout@v2
+          - uses: actions/setup-node@v1
+            with:
+              node-version: 12
+          - uses: actions/download-artifact@v2
+            with:
+              name: nextjs-build
+          - run: ls .
+          
+        
