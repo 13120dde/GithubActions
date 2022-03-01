@@ -1,0 +1,10 @@
+name: Run pws FirstScript
+on: push
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repo        
+        uses: actions/checkout@v2
+      - run: |
+          ./Scripts/FirstScript.ps1
