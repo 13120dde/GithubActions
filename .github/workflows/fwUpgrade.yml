@@ -20,7 +20,6 @@ jobs:
       - name: Swow atConfiguration
         run: echo ${{matrix.atConfigurations}}
 
-        #read config json site name
       - name: get default_site.site
         id: site
         uses: notiz-dev/github-action-json-property@release
@@ -29,7 +28,22 @@ jobs:
             prop_path: 'name'
       - run: echo ${{steps.site.outputs.prop}} 
 
-        #read config json credentials
+      - name: get run_settings.defaultUser.userName
+        id: userName
+        uses: notiz-dev/github-action-json-property@release
+        with: 
+            path: './ATConfigurations/${{matrix.atConfigurations}}/run_settings.json'
+            prop_path: 'users.defaultUser.userName'
+      - run: echo ${{steps.userName.outputs.prop}} 
+      
+      - name: get run_settings.defaultUser.userPassword
+        id: userPassword
+        uses: notiz-dev/github-action-json-property@release
+        with: 
+            path: './ATConfigurations/${{matrix.atConfigurations}}/run_settings.json'
+            prop_path: 'users.defaultUser.userPassword'
+      - run: echo ${{steps.userPassword.outputs.prop}} 
+        
 
         # run ps1 script with json data
 
