@@ -11,7 +11,7 @@ jobs:
       matrix:
         run: ['run1','run2']
     steps:
-      - run: echo Run $ {{matrix.run}}
+      - run: echo Run ${{matrix.run}}
       - run: date
       
   
