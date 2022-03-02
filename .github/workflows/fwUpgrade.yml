@@ -25,7 +25,7 @@ jobs:
         id: site
         uses: notiz-dev/github-action-json-property@release
         with: 
-            path: './ATConfigurations/Dc_PlaybackFlaui/default_site.json'
+            path: './ATConfigurations/${{matrix.atConfigurations}}/default_site.json'
             prop_path: 'name'
       - run: echo ${{steps.site.outputs.prop}} 
 
