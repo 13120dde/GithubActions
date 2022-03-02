@@ -14,8 +14,10 @@ jobs:
       matrix: 
         atConfigurations: ["Dc_PlaybackFlaui","Dc_RecordFlaui", "FlaUI_PreviewCUC"]
 
-    steps:    
-      - uses: actions/checkout@v2
+    steps:
+    
+      - name: Check out repo
+        uses: actions/checkout@v2
 
       - name: get default_site.site
         id: site
@@ -44,5 +46,13 @@ jobs:
           ${{steps.site.outputs.prop}} 
           ${{steps.userName.outputs.prop}} 
           ${{steps.userPassword.outputs.prop}} 
+          
+      - name: Run FW Script
+        run: |
+          ./Scripts/UpgradeFirmware.ps1 ${{matrix.atConfigurations}} ${{steps.site.outputs.prop}} ${{steps.userName.outputs.prop}} ${{steps.userPassword.outputs.prop}} 
+          
+          
+          
+          
           
         
