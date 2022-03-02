@@ -6,22 +6,17 @@ on: push
 jobs:
 
   job1:
-      runs-on: ubuntu-latest
-      outputs:
-        matrix: ${{ steps.set-matrix.outputs.matrix }}
-      steps:
-        - id: set-matrix
-          run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
-  job2:
-    needs: job1
-    runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
+    runs-on: windows-latest
     steps:
-      - run: build
+    - name: Read package.json
+      id: package
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: ./ATConfigurations/Dc_PlaybackFlaui/default_site.json
+    - name: Echo package.json
+      run: echo "${{ steps.package.outputs.content }}"
 
-  fw-upgrade:
-    
+  fw-upgrade:  
     runs-on: windows-latest
     strategy:
       matrix:
