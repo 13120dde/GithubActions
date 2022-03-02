@@ -5,20 +5,29 @@ on: push
 
 jobs:
 
-  job1:
+  read-json-at-configs:
     runs-on: windows-latest
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
-    - name: Read package.json
-      id: package
+    - name: Read default_site.json
+      id: defaultSite
       uses: juliangruber/read-file-action@v1
       with:
         path: ./ATConfigurations/Dc_PlaybackFlaui/default_site.json
-    - name: Echo package.json
-      run: echo "${{ steps.package.outputs.content }}"
+    - name: Echo default_site.json
+      run: echo "${{ steps.defaultSite.outputs.content }}"
+      
+    - name: Read run_settings.json
+      id: runSettings
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: ./ATConfigurations/Dc_PlaybackFlaui/run_settings.json
+    - name: Echo run_settings.json
+      run: echo "${{ steps.runSettings.outputs.content }}"
 
   fw-upgrade:  
+    needs: read-json-at-configs
     runs-on: windows-latest
     strategy:
       matrix:
