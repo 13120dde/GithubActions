@@ -1,0 +1,38 @@
+{
+    "name": "automatic_created_site",
+    "devicePassword": "abcd12345",
+    "devices": [
+        {
+            "isActive": true,
+            "mac": "B8A44F2F0CF6",
+            "ipAddress": "172.26.20.140",
+            "type": "standardcamera",
+            "model": "M1065-L",
+            "hasAudio": true,
+            "hasFenceGuard": true,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F284A2E"
+        },
+        {
+            "isActive": true,
+            "mac": "B8A44F189430",
+            "ipAddress": "172.26.20.178",
+            "type": "standardcamera",
+            "model": "M3057-PLVE",
+            "hasAudio": false,
+            "hasFenceGuard": false,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F284A2E"
+        },
+        {
+            "isActive": true,
+            "mac": "B8A44F284A2E",
+            "ipAddress": "172.26.20.153",
+            "type": "recorder",
+            "model": "S3008",
+            "hasStorageConnectedToUsb": false
+        }
+    ]
+}

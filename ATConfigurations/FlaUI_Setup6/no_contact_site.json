@@ -1,0 +1,11 @@
+{
+    "name": "No contact site",
+    "devicePassword": "abcd12345",
+    "devices": [
+        {
+            "isActive": true,
+            "mac": "ACCC8E884266",
+			"type": "standardcamera"
+        }
+    ]
+}

@@ -1,0 +1,43 @@
+{
+    "name": "automatic_created_site_stage",
+    "devicePassword": "abcd12345",
+    "devices": [
+        {
+            "isActive": true,
+            "mac": "ACCC8EBD66BC",
+            "ipAddress": "172.26.20.109",
+            "type": "standardcamera",
+            "hasAudio": false,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "ACCC8EC410F3"
+        },
+        {
+            "isActive": true,
+            "mac": "ACCC8E7964A3",
+            "ipAddress": "172.26.20.107",
+            "type": "standardcamera",
+            "hasAudio": true,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "ACCC8EC410F3"
+        },
+        {
+            "isActive": true,
+            "mac": "ACCC8EB4D9CC",
+            "ipAddress": "172.26.20.108",
+            "type": "minicamera",
+            "hasAudio": false,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "ACCC8EC410F3"
+        },
+        {
+            "isActive": true,
+            "mac": "ACCC8EC410F3",
+            "ipAddress": "172.26.20.128",
+            "type": "Recorder",
+            "model": "ACR"
+        }
+    ]
+}

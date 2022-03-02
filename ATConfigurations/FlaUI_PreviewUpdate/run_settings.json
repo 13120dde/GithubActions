@@ -1,0 +1,15 @@
+{
+    "users": {
+        "defaultUser": {
+            "userName": "axisqa-accwin+uitest1@axis.com",
+            "userPassword": "Flaui2020automation"
+        }
+    },
+    "app": {
+        "applicationName": "AxisCompanion4",
+        "applicationBuildType": "Preview",
+        "applicationUpdatePath": "--updateUrl=<<PATH>>"
+    },
+    "sitesConfigPath": "Configurations",
+    "connectEnvironment": "prod"
+}

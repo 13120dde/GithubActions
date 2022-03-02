@@ -1,0 +1,72 @@
+{
+    "name": "default_site",
+    "devicePassword": "abcd12345",
+    "devices": [
+        {
+            "isActive": true,
+            "mac": "ACCC8EC410E0",
+            "ipAddress": "172.26.20.114",
+            "type": "recorder",
+            "model": "ACR"
+        }, 
+        {
+            "isActive": true,
+            "mac": "B8A44F2756D1",
+            "ipAddress": "172.26.20.229",
+            "type": "doorStation",
+            "model": "A8207",
+            "hasAudio": true,
+            "doorStationPort": "6",
+            "hasSdCard": true,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F284B9F"
+        }, 
+        {
+            "isActive": true,
+            "mac": "ACCC8ED8A2DE",
+            "ipAddress": "172.26.20.157",
+            "type": "minicamera",
+            "hasAudio": false,
+            "orientations": 4,
+            "initialStorage": "Recorder",
+            "recorder": "ACCC8EC410E0"
+        }, 
+        {
+            "isActive": true,
+            "mac": "B8A44F42EC54",
+            "ipAddress": "172.26.20.159",
+            "type": "standardcamera",
+            "hasAudio": false,
+            "model": "M3115",
+            "hasFenceGuard": true,
+            "hasSdCard": true,
+            "initialStorage": "SdCard"
+        }, 
+        {
+            "isActive": true,
+            "mac": "B8A44F284B9F",
+            "ipAddress": "172.26.20.152",
+            "type": "recorder",
+            "model": "S3008",
+            "hasStorageConnectedToUsb": true
+        }, 
+        {
+            "isActive": true,
+            "mac": "B8A44F229BE6",
+            "ipAddress": "172.26.20.230",
+            "type": "standardcamera",
+            "model": "Q6135",
+            "hasPtz": true,
+            "hasFenceGuard": true,
+            "orientations": 2,
+            "initialStorage": "Recorder",
+            "recorder": "ACCC8EC410E0"
+        }, 
+        {
+            "isActive": true,
+            "mac": "ACCC8EEF50C4",
+            "ipAddress": "172.26.20.224",
+            "type": "speaker"
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "users": {
+        "defaultUser": {
+            "userName": "axisqa-accwin+uitest1-stage@axis.com",
+            "userPassword": "Flaui2020automation"
+        },
+        "admin": {
+            "userName": "axisqa-accwin+automation4@axis.com",
+            "userPassword": "accautomation4"
+        },
+        "operator": {
+            "userName": "axisqa-accwin+automation3@axis.com",
+            "userPassword": "accautomation3"
+        },
+        "viewer": {
+            "userName": "axisqa-accwin+automation2@axis.com",
+            "userPassword": "accautomation2"
+        }
+    },
+    "app": {
+        "applicationName": "AxisCompanion4",
+        "applicationBuildType": "Released",
+        "applicationUpdatePath": "--updateUrl=<<PATH>>"
+    },
+    "sitesConfigPath": "Configurations",
+    "connectEnvironment": "beta"
+}

@@ -1,0 +1,74 @@
+{
+    "Dc_RecordFlauiTests": {
+        "QA-AUTOMATION-ACC-WIN10_3": "Dc_RecordFlaui",
+        "QA-AUTOMATION-ACC-WIN10_6" : "Dc_RecordFlaui"
+    },
+    "Dc_RecordSpecificFlauiTest": {
+        "QA-AUTOMATION-ACC-WIN10_3": "Dc_RecordFlaui",
+        "QA-AUTOMATION-ACC-WIN10_6" : "Dc_RecordFlaui"
+    },
+    "Flaui_CUC_Install": {
+        "QA-AUTOMATION-ACC-WIN10_2": "FlaUI_Setup5"
+    },
+    "FlaUI_CUC_NonInstall": {
+        "QA-AUTOMATION-ACC-WIN10_2": "FlaUI_Setup3"
+    },
+    "FlaUI_CUC_P2P": {
+        "QA-AUTOMATION-ACC-WIN10_2": "FlaUI_Setup3"
+    },
+    "FlaUI_CUC_Turn": {
+        "QA-AUTOMATION-ACC-WIN10_2": "FlaUI_Setup3"
+    },
+    "FlaUI_FullNightly": {
+        "QA-AUTOMATION-ACC-WIN10_3": "FlaUI_Setup6",
+        "QA-AUTOMATION-ACC-WIN10_6" : "FlaUI_Setup6"
+    },
+    "FlaUI_LowFw": {
+        "QA-AUTOMATION-ACC-WIN10_3": "FlaUI_Setup2",
+        "QA-AUTOMATION-ACC-WIN10_6" : "FlaUI_Setup2"
+    },
+    "FlaUI_MergeToMaster": {
+        "QA-AUTOMATION-ACC-WIN10_3": "FlaUI_Setup4",
+        "QA-AUTOMATION-ACC-WIN10_6" : "FlaUI_Setup1"
+    },
+    "FlaUI_RunSpecificTest": {
+        "QA-AUTOMATION-ACC-WIN10_3": "FlaUI_Setup4",
+        "QA-AUTOMATION-ACC-WIN10_6" : "FlaUI_Setup1"
+    },
+    "FlaUI_Stability": {
+        "QA-AUTOMATION-ACC-WIN10_STAB": "FlaUI_StabSetup"
+    },
+    "Preview_FlaUICUC": {
+        "QA-AUTOMATION-ACC-WIN10_3": "FlaUI_PreviewCUC"
+    },
+    "Preview_FlaUITelemetry": {
+        "QA-AUTOMATION-ACC-WIN10_3": "FlaUI_PreviewTelemetry"
+    },
+    "Preview_FlaUIUpdate": {
+        "QA-AUTOMATION-ACC-WIN10_6" : "FlaUI_PreviewUpdate"
+    },
+    "Public_FlaUICUC": {
+        "QA-AUTOMATION-ACC-WIN10_3": "FlaUI_Setup6"
+    },
+    "Public_FlaUITelemetry": {
+        "QA-AUTOMATION-ACC-WIN10_3": "FlaUI_PublicTelemetry"
+    },
+    "Public_FlaUIUpdate": {
+        "QA-AUTOMATION-ACC-WIN10_6" : "FlaUI_PublicUpdate"
+    },
+    "FlaUI_RunTestsOnStage": {
+        "QA-AUTOMATION-ACC-WIN10": "FlaUI_StageSetup"
+    },
+    "FlaUI_E2EAllServices": {
+        "QA-AUTOMATION-ACC-WIN10": "FlaUI_StageSetup"
+    },
+    "FlaUI_RestartDevices": {
+        "QA-AUTOMATION-ACC-WIN10_6": "FlaUI_Setup6"
+    },
+    "Companion_E2ECameraCompatibilityNightly": {
+        "QA-AUTOMATION-ACC-WIN10-EMBEDDED": "FlaUI_CUCEmbedded"
+    },
+    "Companion_E2ECameraCompatibility": {
+        "QA-AUTOMATION-ACC-WIN10-EMBEDDED": "FlaUI_CUCEmbedded"
+    }
+}

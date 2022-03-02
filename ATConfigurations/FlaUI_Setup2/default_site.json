@@ -1,0 +1,47 @@
+{
+    "name": "Site",
+    "devicePassword": "abcd12345",
+    "devices": [
+        {
+            "isActive": true,
+            "mac": "ACCC8E30AFE2",
+            "ipAddress": "172.26.20.182",
+            "type": "doorStation",
+            "model": "A8004",
+            "hasAudio": true,
+            "doorStationPort": "6",
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F05C8D3"
+        },
+        {
+            "isActive": true,
+            "mac": "ACCC8E36FEBC",
+            "ipAddress": "172.26.20.222",
+            "type": "standardcamera",
+            "hasAudio": true,
+            "hasFenceGuard": false,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F05C8D3"
+        },
+        {
+            "isActive": true,
+            "mac": "ACCC8E0432CB",
+            "ipAddress": "172.26.20.233",
+            "type": "standardcamera",
+            "hasAudio": false,
+            "hasFenceGuard": false,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F05C8D3"
+        },
+        {
+            "isActive": true,
+            "mac": "B8A44F05C8D3",
+            "ipAddress": "172.26.20.232",
+            "type": "recorder",
+            "model": "S3008"
+        }
+    ]
+}

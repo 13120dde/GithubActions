@@ -1,0 +1,60 @@
+{
+    "name": "TeamCity_CUC_monitor",
+    "devicePassword": "abcd12345",
+    "devices": [
+        {
+            "isActive": true,
+            "mac": "ACCC8E58C694",
+            "ipAddress": "172.26.20.135",
+            "type": "standardcamera",
+            "hasAudio": false,
+            "hasSdCard": true,
+            "initialStorage": "SdCard",
+            "recorder": "B8A44F0BF93F",
+            "deviceConnection": "switch"
+        },
+        {
+            "isActive": true,
+            "mac": "ACCC8E78808B",
+            "ipAddress": "172.26.20.238",
+            "type": "standardcamera",
+            "hasAudio": false,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F0BF93F",
+            "deviceConnection": "switch"
+        },
+        {
+            "isActive": true,
+            "ipAddress": "172.26.20.200",
+            "mac": "ACCC8EBFC492",
+            "type": "doorstation",
+            "model": "A8207",
+            "hasAudio": true,
+            "doorStationPort": "6",
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F0BF93F",
+            "deviceConnection": "recorder"
+        },
+        {
+            "isActive": true,
+            "mac": "B8A44F0BF93F",
+            "type": "Recorder",
+            "IpAddress": "172.26.20.163",
+            "model": "S3008",
+            "hasStorageConnectedToUsb": true
+        },
+        {
+            "isActive": true,
+            "mac": "B8A44F1FAC95",
+            "IpAddress": "172.26.20.165",
+            "type": "standardcamera",
+            "hasAudio": false,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F0BF93F",
+            "deviceConnection": "recorder"
+        }
+    ]
+}

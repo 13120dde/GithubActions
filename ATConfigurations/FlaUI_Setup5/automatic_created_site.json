@@ -1,0 +1,53 @@
+{
+    "name": "Monitor_Flaui_CUC_Install",
+    "devicePassword": "abcd12345",
+    "devices": [
+        {
+            "isActive": true,
+            "mac": "ACCC8E978797",
+            "ipAddress": "172.26.20.227",
+            "type": "standardcamera",
+            "hasAudio": true,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F0ADD17"
+        },
+        {
+            "isActive": true,
+            "mac": "ACCC8EBFD2A6",
+			"ipAddress": "172.26.20.204",
+            "type": "standardcamera",
+            "hasAudio": true,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F0ADD17"
+        },
+        {
+            "isActive": true,
+            "mac": "ACCC8ED934F7",
+			"ipAddress": "172.26.20.237",
+            "type": "standardcamera",
+            "hasAudio": true,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F0ADD17"
+        },
+        {
+            "isActive": true,
+            "mac": "B8A44F0ADD17",
+            "ipAddress": "172.26.20.166",
+            "type": "Recorder",
+            "model": "S3008"
+        },
+        {
+            "isActive": true,
+            "mac": "B8A44F1FABF7",
+			"ipAddress": "172.26.20.167",
+            "type": "standardcamera",
+            "hasAudio": false,
+            "hasSdCard": false,
+            "initialStorage": "Recorder",
+            "recorder": "B8A44F0ADD17"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "users": {
+        "defaultUser": {
+            "userName": "axisqa-accwin+embedded@axis.com",
+            "userPassword": "1qaEmbedded2019"
+        }
+    },
+    "app": {
+        "applicationName": "AxisCompanion4",
+        "applicationBuildType": "Released",
+        "applicationUpdatePath": "--updateUrl=<<PATH>>"
+    },
+    "sitesConfigPath": "C:\\home\\teamcity\\config\\FlaUI_CUCEmbeddedSetup",
+    "connectEnvironment": "prod"
+}
