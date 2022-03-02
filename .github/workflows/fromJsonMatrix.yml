@@ -9,8 +9,8 @@ jobs:
       - id: set-matrix
         #run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
         run: |
-        JSON=$(cat ./your.json)
-        echo "::set-output name=matrix::${JSON//'%'/'%25'}"
+          JSON=$(cat ./your.json)
+          echo "::set-output name=matrix::${JSON//'%'/'%25'}"
   job2:
     needs: job1
     runs-on: ubuntu-latest
