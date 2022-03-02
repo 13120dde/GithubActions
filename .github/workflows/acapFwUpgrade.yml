@@ -28,7 +28,7 @@ jobs:
           prop_path: 'name'
           
     - name: Run echo default_site.name
-      run: echo ${{steps.idName.outputs.name}} 
+      run: echo ${{steps.idName.outputs.prop}} 
 
     - name: Read run_settings.json
       id: runSettings
