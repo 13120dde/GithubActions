@@ -6,6 +6,12 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
+      - name: Read run_settings.json
+        id: runSettings
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./ATConfigurations/GHActionFwUpgradeConfig.json
+
       - id: set-matrix
         run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
   job2:
