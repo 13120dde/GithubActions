@@ -19,3 +19,18 @@ jobs:
       
       - name: Swow atConfiguration
         run: echo ${{matrix.atConfigurations}}
+
+        #read config json site name
+        - name: get default_site.site
+        id: site
+        uses: notiz-dev/github-action-json-property@release
+        with: 
+            path: './ATConfigurations/Dc_PlaybackFlaui/default_site.json'
+            prop_path: 'site'
+        - run: echo ${{steps.site.outputs.prop}} 
+
+        #read config json credentials
+
+        # run ps1 script with json data
+
+        
