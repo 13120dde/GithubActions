@@ -16,9 +16,6 @@ jobs:
 
     steps:    
       - uses: actions/checkout@v2
-      
-      - name: Swow atConfiguration
-        run: echo ${{matrix.atConfigurations}}
 
       - name: get default_site.site
         id: site
@@ -26,15 +23,13 @@ jobs:
         with: 
             path: './ATConfigurations/${{matrix.atConfigurations}}/default_site.json'
             prop_path: 'name'
-      - run: echo ${{steps.site.outputs.prop}} 
-
+     
       - name: get run_settings.defaultUser.userName
         id: userName
         uses: notiz-dev/github-action-json-property@release
         with: 
             path: './ATConfigurations/${{matrix.atConfigurations}}/run_settings.json'
             prop_path: 'users.defaultUser.userName'
-      - run: echo ${{steps.userName.outputs.prop}} 
       
       - name: get run_settings.defaultUser.userPassword
         id: userPassword
@@ -42,9 +37,12 @@ jobs:
         with: 
             path: './ATConfigurations/${{matrix.atConfigurations}}/run_settings.json'
             prop_path: 'users.defaultUser.userPassword'
-      - run: echo ${{steps.userPassword.outputs.prop}} 
-        
-
-        # run ps1 script with json data
-
+            
+      - name: Print JSon data
+        run: echo 
+          ${{matrix.atConfigurations}} 
+          ${{steps.site.outputs.prop}} 
+          ${{steps.userName.outputs.prop}} 
+          ${{steps.userPassword.outputs.prop}} 
+          
         
