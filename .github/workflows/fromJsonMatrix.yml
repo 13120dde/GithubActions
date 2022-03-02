@@ -9,11 +9,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
         
-      - name: Read GHActionFwUpgradeConfig.json
-        id: atSettings
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: './ATConfigurations/GHActionFwUpgradeConfig.json'
+   #   - name: Read GHActionFwUpgradeConfig.json
+   #     id: atSettings
+   #     uses: juliangruber/read-file-action@v1
+   #     with:
+   #       path: './ATConfigurations/GHActionFwUpgradeConfig.json'
 
       - id: set-matrix
         #run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
@@ -25,6 +25,6 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJSON(needs.job1.outputs.matrix)}}
+      matrix: ${{fromJson(needs.job1.outputs.matrix)}}
     steps:
       - run: echo "Hello"
