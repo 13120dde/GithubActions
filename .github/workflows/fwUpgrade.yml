@@ -12,25 +12,47 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix: 
-        atConfigurations: ["Dc_PlaybackFlaui","Dc_RecordFlaui"]
+        atConfigurations: ["Dc_PlaybackFlaui","Dc_RecordFlaui", "FlaUI_PreviewCUC"]
 
-    steps:    
-      - uses: actions/checkout@v2
-      
-      - name: Swow atConfiguration
-        run: echo ${{matrix.atConfigurations}}
+    steps:
+    
+      - name: Check out repo
+        uses: actions/checkout@v2
 
-        #read config json site name
-        - name: get default_site.site
+      - name: get default_site.site
         id: site
         uses: notiz-dev/github-action-json-property@release
         with: 
-            path: './ATConfigurations/Dc_PlaybackFlaui/default_site.json'
-            prop_path: 'site'
-        - run: echo ${{steps.site.outputs.prop}} 
-
-        #read config json credentials
-
-        # run ps1 script with json data
-
+            path: './ATConfigurations/${{matrix.atConfigurations}}/default_site.json'
+            prop_path: 'name'
+     
+      - name: get run_settings.defaultUser.userName
+        id: userName
+        uses: notiz-dev/github-action-json-property@release
+        with: 
+            path: './ATConfigurations/${{matrix.atConfigurations}}/run_settings.json'
+            prop_path: 'users.defaultUser.userName'
+      
+      - name: get run_settings.defaultUser.userPassword
+        id: userPassword
+        uses: notiz-dev/github-action-json-property@release
+        with: 
+            path: './ATConfigurations/${{matrix.atConfigurations}}/run_settings.json'
+            prop_path: 'users.defaultUser.userPassword'
+            
+      - name: Print JSon data
+        run: echo 
+          ${{matrix.atConfigurations}} 
+          ${{steps.site.outputs.prop}} 
+          ${{steps.userName.outputs.prop}} 
+          ${{steps.userPassword.outputs.prop}} 
+          
+      - name: Run FW Script
+        run: |
+          ./Scripts/UpgradeFirmware.ps1 ${{matrix.atConfigurations}} ${{steps.site.outputs.prop}} ${{steps.userName.outputs.prop}} ${{steps.userPassword.outputs.prop}} 
+          
+          
+          
+          
+          
         
