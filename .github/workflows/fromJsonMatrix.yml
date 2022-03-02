@@ -36,6 +36,6 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJson(needs.job1.outputs.packageJson)}}
+      matrix: ${{fromJson(needs.job1.outputs.content)}}
     steps:
       - run: echo "Hello"
