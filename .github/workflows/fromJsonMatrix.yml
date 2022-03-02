@@ -28,10 +28,10 @@ jobs:
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
           # end of optional handling for multi line json
-          echo "::set-output name=packageJson::$content"
+          echo "::set-output name=content::$content"
         
       - run: |
-          echo "${{fromJson(steps.set-matrix.outputs.packageJson)}}"
+          echo "${{fromJson(steps.set-matrix.outputs.content)}}"
   job2:
     needs: job1
     runs-on: ubuntu-latest
