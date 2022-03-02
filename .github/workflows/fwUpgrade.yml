@@ -26,7 +26,7 @@ jobs:
         uses: notiz-dev/github-action-json-property@release
         with: 
             path: './ATConfigurations/Dc_PlaybackFlaui/default_site.json'
-            prop_path: 'site'
+            prop_path: 'name'
       - run: echo ${{steps.site.outputs.prop}} 
 
         #read config json credentials
