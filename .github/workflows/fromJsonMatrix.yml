@@ -19,13 +19,13 @@ jobs:
         run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
         
       - run: |
-          echo "${{fromJson(steps.set-matrix.outputs.content)}}"
+          echo "${{fromJson(steps.set-matrix.outputs.matrix)}}"
   job2:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{fromJson(needs.job1.outputs.content)}}
+        value: ${{fromJson(needs.job1.outputs.matrix)}}
     steps:
       - run: |
           echo "${{matrix.value}}"
