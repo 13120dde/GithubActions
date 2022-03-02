@@ -22,6 +22,7 @@ jobs:
             echo "${{fromJson(steps.set_var.outputs.packageJson).version}}"
 
   fw-upgrade:
+    needs: testJob
     runs-on: windows-latest
     strategy:
       matrix:
