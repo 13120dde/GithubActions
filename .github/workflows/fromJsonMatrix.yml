@@ -28,7 +28,7 @@ jobs:
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
           # end of optional handling for multi line json
-          echo "::set-output name=content::${{fromJson(content)}}"
+          echo "::set-output name=content::$content"
         
       - run: |
           echo "${{fromJson(steps.set-matrix.outputs.content)}}"
@@ -36,6 +36,8 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJson(needs.job1.outputs.content)}}
+      matrix:
+        value: ${{fromJson(needs.job1.outputs.content)}}
     steps:
-      - run: echo "Hello"
+      - run: |
+          echo "${{matrix.value}}"
