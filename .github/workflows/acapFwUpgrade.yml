@@ -10,7 +10,29 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
- 
+
+    - name: get Dc_PlaybackFlaui site
+      id: siteDc_PlaybackFlaui
+      uses: notiz-dev/github-action-json-property@release
+      with: 
+          path: ./ATConfigurations/GHActionFwUpgradeConfig.json
+          prop_path: 'Dc_PlaybackFlaui.site'
+          
+    - name: Run echo Dc_PlaybackFlaui site
+      run: echo ${{steps.siteDc_PlaybackFlaui.outputs.prop}} 
+      
+    - name: get FlaUI_PreviewCUC site 
+      id: siteFlaUI_PreviewCUC
+      uses: notiz-dev/github-action-json-property@release
+      with: 
+          path: ./ATConfigurations/GHActionFwUpgradeConfig.json
+          prop_path: 'FlaUI_PreviewCUC.site'
+          
+    - name: Run echo FlaUI_PreviewCUC site
+      run: echo ${{steps.siteFlaUI_PreviewCUC.outputs.prop}} 
+
+
+
  #   - name: Read default_site.json
   #    id: defaultSite
    #   uses: juliangruber/read-file-action@v1
@@ -20,15 +42,8 @@ jobs:
     #- name: Echo default_site.json
      # run: echo "${{ steps.defaultSite.outputs.content }}"
       
-    - name: get Dc_PlaybackFlaui site
-      id: idSite
-      uses: notiz-dev/github-action-json-property@release
-      with: 
-          path: ./ATConfigurations/GHActionFwUpgradeConfig.json
-          prop_path: 'Dc_PlaybackFlaui.site'
-          
-    - name: Run echo default_site.name
-      run: echo ${{steps.idSite.outputs.prop}} 
+
+
 
    # - name: Read run_settings.json
    #   id: runSettings
