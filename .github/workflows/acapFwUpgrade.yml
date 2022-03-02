@@ -24,7 +24,7 @@ jobs:
       id: idSite
       uses: notiz-dev/github-action-json-property@release
       with: 
-          path: GHActionFwUpgradeConfig.json
+          path: ./ATConfigurations/GHActionFwUpgradeConfig.json
           prop_path: 'Dc_PlaybackFlaui.site'
           
     - name: Run echo default_site.name
