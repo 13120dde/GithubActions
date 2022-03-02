@@ -4,7 +4,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.atSettings.outputs.matrix }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -17,7 +17,10 @@ jobs:
 
       - id: set-matrix
         #run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
-        run: echo "::set-output name=matrix::steps.atSettings.outputs.content"
+        #run: echo "::set-output name=matrix::steps.atSettings.outputs.content"
+        run: |
+          JSON=$(cat ./ATConfigurations/GHActionFwUpgradeConfig.json)
+          echo "::set-output name=matrix::${JSON//'%'/'%25'}"
   job2:
     needs: job1
     runs-on: ubuntu-latest
