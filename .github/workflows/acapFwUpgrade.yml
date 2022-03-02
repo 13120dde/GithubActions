@@ -11,16 +11,16 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v2
  
-    - name: Read default_site.json
-      id: defaultSite
-      uses: juliangruber/read-file-action@v1
-      with:
-        path: ./ATConfigurations/Dc_PlaybackFlaui/default_site.json
+ #   - name: Read default_site.json
+  #    id: defaultSite
+   #   uses: juliangruber/read-file-action@v1
+    #  with:
+     #   path: ./ATConfigurations/Dc_PlaybackFlaui/default_site.json
     
-    - name: Echo default_site.json
-      run: echo "${{ steps.defaultSite.outputs.content }}"
+    #- name: Echo default_site.json
+     # run: echo "${{ steps.defaultSite.outputs.content }}"
       
-    - name: get idName
+    - name: get default_site.name
       id: idName
       uses: notiz-dev/github-action-json-property@release
       with: 
@@ -30,17 +30,17 @@ jobs:
     - name: Run echo default_site.name
       run: echo ${{steps.idName.outputs.prop}} 
 
-    - name: Read run_settings.json
-      id: runSettings
-      uses: juliangruber/read-file-action@v1
-      with:
-        path: ./ATConfigurations/Dc_PlaybackFlaui/run_settings.json
+   # - name: Read run_settings.json
+   #   id: runSettings
+   #   uses: juliangruber/read-file-action@v1
+   #   with:
+   #     path: ./ATConfigurations/Dc_PlaybackFlaui/run_settings.json
     
-    - name: Echo run_settings.json
-      run: echo "${{ steps.runSettings.outputs.content }}"
+   # - name: Echo run_settings.json
+   #   run: echo "${{ steps.runSettings.outputs.content }}"
 
-    - name: Echo run_settings_users
-      run: echo "${{ steps.runSettings.outputs.content }}"
+   # - name: Echo run_settings_users
+   #   run: echo "${{ steps.runSettings.outputs.content }}"
 
 
 
