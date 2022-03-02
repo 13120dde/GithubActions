@@ -1,0 +1,17 @@
+name: Firmware Upgrade
+on: push
+#  schedule:
+#    - cron: '0 0 * * SAT'
+
+jobs:
+
+  fw-upgrade:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        run: ['run1','run2']
+    steps:
+      - run: echo Run $ {{matrix.run}}
+      - run: date
+      
+  
