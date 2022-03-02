@@ -1,0 +1,5 @@
+Build med matis
+ -siite -> ATConfigurations\Dc_PlaybackFlaui\default_site
+ - username
+ - password - > ATConfigurations\Dc_PlaybackFlaui\run_settings.defaultUser
+ 
