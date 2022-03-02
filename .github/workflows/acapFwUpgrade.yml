@@ -5,13 +5,56 @@ on: push
 
 jobs:
 
-  fw-upgrade:
+  read-json-at-configs:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        run: ['run1','run2']
     steps:
-      - run: echo Run $ {{matrix.run}}
-      - run: date
+    - name: Check out repository
+      uses: actions/checkout@v2
+ 
+ #   - name: Read default_site.json
+  #    id: defaultSite
+   #   uses: juliangruber/read-file-action@v1
+    #  with:
+     #   path: ./ATConfigurations/Dc_PlaybackFlaui/default_site.json
+    
+    #- name: Echo default_site.json
+     # run: echo "${{ steps.defaultSite.outputs.content }}"
+      
+    - name: get Dc_PlaybackFlaui site
+      id: idSite
+      uses: notiz-dev/github-action-json-property@release
+      with: 
+          path: ./ATConfigurations/GHActionFwUpgradeConfig.json
+          prop_path: 'Dc_PlaybackFlaui.site'
+          
+    - name: Run echo default_site.name
+      run: echo ${{steps.idSite.outputs.prop}} 
+
+   # - name: Read run_settings.json
+   #   id: runSettings
+   #   uses: juliangruber/read-file-action@v1
+   #   with:
+   #     path: ./ATConfigurations/Dc_PlaybackFlaui/run_settings.json
+    
+   # - name: Echo run_settings.json
+   #   run: echo "${{ steps.runSettings.outputs.content }}"
+
+   # - name: Echo run_settings_users
+   #   run: echo "${{ steps.runSettings.outputs.content }}"
+
+
+
+
+
+
+#  fw-upgrade:  
+ #   needs: read-json-at-configs
+  #  runs-on: windows-latest
+   # strategy:
+    #  matrix:
+     #   run: ['run1','run2']
+   # steps:
+    #  - run: echo Run ${{matrix.run}}
+    #  - run: date
       
   
