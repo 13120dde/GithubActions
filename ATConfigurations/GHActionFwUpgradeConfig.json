@@ -1,0 +1,16 @@
+{
+	"Dc_PlaybackFlaui":{
+		"defaultUser": {
+            "userName": "axisqa-accwin+uitest1@axis.com",
+            "userPassword": "Flaui2020automation"
+        },
+		"site":"Site"
+	},
+	"FlaUI_PreviewCUC":{
+		"defaultUser": {
+            "userName": "axisqa-accwin+uitest1235@axis.com",
+            "userPassword": "Flaui2020automation"
+        },
+		"site": "default_site"
+	}
+}
