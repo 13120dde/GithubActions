@@ -20,13 +20,15 @@ jobs:
     - name: Echo default_site.json
       run: echo "${{ steps.defaultSite.outputs.content }}"
       
-    - name: get version
+    - name: get idName
       id: idName
       uses: notiz-dev/github-action-json-property@release
       with: 
           path: './ATConfigurations/Dc_PlaybackFlaui/default_site.json'
           prop_path: 'name'
-    - run: echo ${{steps.idName.outputs.name}} 
+          
+    - name: Run echo default_site.name
+      run: echo ${{steps.idName.outputs.name}} 
 
     - name: Read run_settings.json
       id: runSettings
