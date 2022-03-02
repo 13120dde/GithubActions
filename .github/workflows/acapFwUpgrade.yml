@@ -10,30 +10,49 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
+ 
     - name: Read default_site.json
       id: defaultSite
       uses: juliangruber/read-file-action@v1
       with:
         path: ./ATConfigurations/Dc_PlaybackFlaui/default_site.json
+    
     - name: Echo default_site.json
       run: echo "${{ steps.defaultSite.outputs.content }}"
       
+    - name: get version
+      id: idName
+      uses: notiz-dev/github-action-json-property@release
+      with: 
+          path: './ATConfigurations/Dc_PlaybackFlaui/default_site.json'
+          prop_path: 'name'
+    - run: echo ${{steps.idName.outputs.name}} 
+
     - name: Read run_settings.json
       id: runSettings
       uses: juliangruber/read-file-action@v1
       with:
         path: ./ATConfigurations/Dc_PlaybackFlaui/run_settings.json
+    
     - name: Echo run_settings.json
       run: echo "${{ steps.runSettings.outputs.content }}"
 
-  fw-upgrade:  
-    needs: read-json-at-configs
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        run: ['run1','run2']
-    steps:
-      - run: echo Run ${{matrix.run}}
-      - run: date
+    - name: Echo run_settings_users
+      run: echo "${{ steps.runSettings.outputs.content }}"
+
+
+
+
+
+
+#  fw-upgrade:  
+ #   needs: read-json-at-configs
+  #  runs-on: windows-latest
+   # strategy:
+    #  matrix:
+     #   run: ['run1','run2']
+   # steps:
+    #  - run: echo Run ${{matrix.run}}
+    #  - run: date
       
   
