@@ -16,19 +16,7 @@ jobs:
    #       path: './ATConfigurations/GHActionFwUpgradeConfig.json'
 
       - id: set-matrix
-        #run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
-        #run: echo "::set-output name=matrix::steps.atSettings.outputs.content"
-        #run: |
-         # JSON=$(cat ./ATConfigurations/GHActionFwUpgradeConfig.json)
-          #echo "::set-output name=matrix::${JSON//'%'/'%25'}"
-        run: |
-          content=`cat ./ATConfigurations/GHActionFwUpgradeConfig.json`
-          # the following lines are only required for multi line json
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          # end of optional handling for multi line json
-          echo "::set-output name=content::$content"
+        run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
         
       - run: |
           echo "${{fromJson(steps.set-matrix.outputs.content)}}"
