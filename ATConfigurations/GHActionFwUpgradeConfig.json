@@ -1,17 +1,4 @@
-{
-	"include":[
-		{
-			"atConfiguration":"Dc_PlaybackFlaui",
-			"site":"Site",
-			"userName":"axisqa-accwin+uitest1@axis.com",
-			"userPass":"Flaui2020automation"
-		},
-		{
-			"atConfiguration":"FlaUI_PreviewCUC",
-			"site":"default_site",
-			"userName":"axisqa-accwin+uitest1235@axis.com",
-			"userPass":"Flaui2020automation"
-		}
-		
-	]
-}
+[
+	"Dc_PlaybackFlaui",
+	"Dc_RecordFlaui"
+]
