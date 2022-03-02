@@ -12,7 +12,7 @@ jobs:
       id: package
       uses: juliangruber/read-file-action@v1
       with:
-        path: ./ATConfigurations/Dc_PlaybackFlaui/default_site.json
+        path: /ATConfigurations/Dc_PlaybackFlaui/default_site.json
     - name: Echo package.json
       run: echo "${{ steps.package.outputs.content }}"
 
