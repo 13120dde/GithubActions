@@ -4,7 +4,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      matrix: ${{ steps.atSettings.outputs.matrix }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
