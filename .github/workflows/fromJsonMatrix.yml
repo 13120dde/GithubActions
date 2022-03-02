@@ -9,7 +9,7 @@ jobs:
       - id: set-matrix
         #run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
         run: |
-          JSON=$(cat ./your.json)
+          JSON=$(cat ./ATConfigurations/GHActionFwUpgradeConfig.json)
           echo "::set-output name=matrix::${JSON//'%'/'%25'}"
   job2:
     needs: job1
