@@ -5,7 +5,7 @@ $password = $args[3]
 
 Write-Host "Starting FW upgrade script for following configuration:"
 
-write-host "\t AT: " + $atConfiguration
-write-host "\t Site: " + $siteName
-write-host "\t User: " + $user
-write-host "\tPassword: " + $password
+write-host "`tAT: $atConfiguration"
+write-host "`tSite: $siteName"
+write-host "`tUser: $user"
+write-host "`tPassword: $password"
