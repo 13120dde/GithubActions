@@ -1,6 +1,6 @@
 {
-    "name": "Site",
-    "devicePassword": "abcd12345",
+    "name": "Site_AtConfiguration_2",
+    "devicePassword": "pw_atconfiguration_2",
     "devices": [
         {
             "isActive": true,

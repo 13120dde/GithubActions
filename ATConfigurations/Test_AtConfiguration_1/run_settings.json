@@ -1,8 +1,8 @@
 {
     "users": {
         "defaultUser": {
-            "userName": "axisqa-accwin+uitest1@axis.com",
-            "userPassword": "Flaui2020automation"
+            "userName": "usr_atconfiguration_1@axis.com",
+            "userPassword": "pw_usr_atconfiguration_1"
         },
         "admin": {
             "userName": "axisqa-accwin+automation4@axis.com",
