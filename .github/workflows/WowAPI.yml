@@ -18,16 +18,10 @@ jobs:
       - name: Authenticate with BNet
         id: bnet-auth
         run: |
-          $Uri = "https://eu.battle.net/oauth/token"
-          $RequestBody = @{
-              client_id  = '${{secrets.WOW_CLIENT_ID}}'
-              client_secret  = '${{secrets.WOW_CLIENT_SECRET}}'
-              grant_type = 'client_credentials'
-          }
-          $Result = Invoke-WebRequest -Uri $Uri -Method Post -Body $RequestBody
-          $token = ConvertFrom-Json $Result.Content
-          Write-Host $token
-       # run: |
-        #  $access_token =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
-        # Write-Host "accToken $access_token"
-          
+          $AccessToken =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
+          echo '::set-output name=access-token::${{AccessToken}}'
+
+      - name: Get Characters from Server
+        run: |
+          $AccessToken = ${{steps.bnet-auth.outputs.access-token}}
+          Write-Host $AccessToken
