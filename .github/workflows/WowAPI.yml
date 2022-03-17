@@ -1,0 +1,33 @@
+
+name: WOW API TRAINING
+on:  
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  authenticate-bnet:
+    runs-on: windows-latest
+    steps:
+    
+      - name: Check out repo
+        uses: actions/checkout@v2
+
+      - name: GET Bearer token
+        id: bnet-auth
+        run: |
+            $Uri = "https://us.battle.net/oauth/token"
+            $Form = @{
+                client_id  = ${{secrets.WOW_CLIENT_ID}}
+                client_secret  = ${{secrets.WOW_CLIENT_SECRET}}
+                grant_type = 'client_credentials'
+            }
+            $Result = Invoke-RestMethod -Uri $Uri -Method Post -Form $Form
+            Write-Host $Result
+          
+          
+          
+          
+        
