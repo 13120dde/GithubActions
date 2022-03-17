@@ -27,6 +27,5 @@ jobs:
       #      $Result = Invoke-RestMethod -Uri $Uri -Method Post -Form $Form
        #     Write-Host $Result
         run: |
-          
           $access_token =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
           Write-Host "accToken $access_token"
