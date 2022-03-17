@@ -21,15 +21,16 @@ jobs:
        
           $AccessToken =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
           Write-Host "accToken $AccessToken"
-          echo ::set-output name=access-token::$(echo ${AccessToken}
+          echo ::set-output name=access-token::$(echo ${AccessToken})
+          echo ::set-output name=access-token2::$(AccessToken)
       
       - name: Get Characters from Server
-        with:
-          args: ${{ steps.bnet-auth.outputs.access-token }}
         run: |
-          $AccessToken = ${{env.action_state}}
+          $AccessToken = ${{ steps.bnet-auth.outputs.access-token }}
           Write-Host "accToken $AccessToken"
-          Write-Host "args $args"
-          Write-Host "args2 ${{args}}"
+
+          $AccessToken2 = ${{ steps.bnet-auth.outputs.access-token2 }}
+          Write-Host "accToken2 $AccessToken2"
+
 
           
