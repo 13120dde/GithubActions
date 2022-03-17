@@ -22,7 +22,7 @@ jobs:
           $AccessToken =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
           Write-Host "accToken $AccessToken"
           echo ::set-output name=access-token::$(echo ${AccessToken})
-          echo ::set-output name=access-token2::$(AccessToken)
+          echo ::set-output name=access-token2::$AccessToken
       
       - name: Get Characters from Server
         run: |
