@@ -26,8 +26,3 @@ jobs:
             }
             $Result = Invoke-RestMethod -Uri $Uri -Method Post -Form $Form
             Write-Host $Result
-          
-          
-          
-          
-        
