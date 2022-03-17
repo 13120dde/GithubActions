@@ -18,10 +18,11 @@ jobs:
       - name: Authenticate with BNet
         id: bnet-auth
         run: |
-          $AccessToken =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
-          echo '::set-output name=access-token::${{AccessToken}}'
+          $access_token =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
+          echo '::set-output name=access-token::${{access_token}}'
 
       - name: Get Characters from Server
         run: |
-          $AccessToken = ${{steps.bnet-auth.outputs.access-token}}
-          Write-Host $AccessToken
+          $access_token = ${{steps.bnet-auth.outputs.access-token}}
+          Write-Host $access_token
+          
