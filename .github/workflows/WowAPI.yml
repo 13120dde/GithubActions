@@ -21,11 +21,15 @@ jobs:
        
           $AccessToken =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
           Write-Host "accToken $AccessToken"
-          echo "action_state=$(AccessToken)" >> $GITHUB_ENV
+          echo ::set-output name=access-token::$(echo ${AccessToken}
       
       - name: Get Characters from Server
+        with:
+          args: ${{ steps.bnet-auth.outputs.access-token }}
         run: |
           $AccessToken = ${{env.action_state}}
           Write-Host "accToken $AccessToken"
+          Write-Host "args $args"
+          Write-Host "args2 ${{args}}"
 
           
