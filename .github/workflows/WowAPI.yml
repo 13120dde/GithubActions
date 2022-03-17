@@ -26,7 +26,7 @@ jobs:
       
       - name: Get Characters from Server
         run: |
-          $AccessToken = ${{ steps.bnet-auth.outputs.access-token }}
+          AccessToken = ${{ steps.bnet-auth.outputs.access-token }}
           Write-Host "accToken $AccessToken"
 
           $AccessToken2 = ${{ steps.bnet-auth.outputs.access-token2 }}
