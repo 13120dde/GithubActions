@@ -15,14 +15,18 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v2
 
-      - name: GET Bearer token
+      - name: Authenticate with BNet
         id: bnet-auth
+   #     run: |
+   #         $Uri = "https://eu.battle.net/oauth/token"
+   #         $Form = @{
+   #             client_id  = ${{secrets.WOW_CLIENT_ID}}
+   #             client_secret  = ${{secrets.WOW_CLIENT_SECRET}}
+    #            grant_type = 'client_credentials'
+     #       }
+      #      $Result = Invoke-RestMethod -Uri $Uri -Method Post -Form $Form
+       #     Write-Host $Result
         run: |
-            $Uri = "https://us.battle.net/oauth/token"
-            $Form = @{
-                client_id  = ${{secrets.WOW_CLIENT_ID}}
-                client_secret  = ${{secrets.WOW_CLIENT_SECRET}}
-                grant_type = 'client_credentials'
-            }
-            $Result = Invoke-RestMethod -Uri $Uri -Method Post -Form $Form
-            Write-Host $Result
+          
+          $access_token =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
+          Write-Host "accToken $access_token"
