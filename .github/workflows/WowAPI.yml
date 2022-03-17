@@ -18,14 +18,14 @@ jobs:
       - name: Authenticate with BNet
         id: bnet-auth
         run: |
-          
-          $access_token =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
-          Write-Host "accToken $access_token"
-          echo '::set-output name=access-token::$(access_token)'
-
+       
+          $AccessToken =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
+          Write-Host "accToken $AccessToken"
+          echo "access-token=$AccessToken" >> $GITHUB_ENV
+      
       - name: Get Characters from Server
         run: |
-          $access_token = ${{steps.bnet-auth.outputs.access-token}}
-          Write-Host $access_token
+          $AccessToken = ${{env.access-token}}
+          Write-Host $AccessToken
 
           
