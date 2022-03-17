@@ -17,15 +17,17 @@ jobs:
 
       - name: Authenticate with BNet
         id: bnet-auth
-   #     run: |
-   #         $Uri = "https://eu.battle.net/oauth/token"
-   #         $Form = @{
-   #             client_id  = ${{secrets.WOW_CLIENT_ID}}
-   #             client_secret  = ${{secrets.WOW_CLIENT_SECRET}}
-    #            grant_type = 'client_credentials'
-     #       }
-      #      $Result = Invoke-RestMethod -Uri $Uri -Method Post -Form $Form
-       #     Write-Host $Result
         run: |
-          $access_token =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
-          Write-Host "accToken $access_token"
+          $Uri = "https://eu.battle.net/oauth/token"
+          $RequestBody = @{
+              client_id  = ${{secrets.WOW_CLIENT_ID}}
+              client_secret  = ${{secrets.WOW_CLIENT_SECRET}}
+              grant_type = 'client_credentials'
+          }
+          $Result = Invoke-WebRequest -Uri $Uri -Method Post -Body $RequestBody
+          $token = ConvertFrom-Json $Result.Content
+          Write-Host $token
+       # run: |
+        #  $access_token =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
+        # Write-Host "accToken $access_token"
+          
