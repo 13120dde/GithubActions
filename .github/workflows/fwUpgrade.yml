@@ -12,7 +12,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix: 
-        atConfigurations: ["Dc_PlaybackFlaui","Dc_RecordFlaui", "FlaUI_PreviewCUC"]
+        atConfigurations: ["Test_AtConfiguration_2", "Test_AtConfiguration_2"]
 
     steps:
     
