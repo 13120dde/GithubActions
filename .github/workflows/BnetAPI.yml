@@ -13,7 +13,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-     # access-token: ${{steps.bnet-auth.outputs.access-token}}
+      access-token: ${{steps.bnet-auth.outputs.access-token}}
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
     
@@ -25,12 +25,15 @@ jobs:
         shell: pwsh  
         run: |
           $AccessToken =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}} ${{env.ACCOUNT_REGION}}
-      #    echo "::set-output name=access-token::$AccessToken"
+          echo "::set-output name=access-token::$AccessToken"
           
       - name: Get Characters from Server
         id: set-matrix
         shell: pwsh  
-        run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+        run: |
+          $Characters = ./Scripts/GetCharactersFromServer.ps1 ${{steps.bnet-auth.outputs.access-token }} ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}}
+          Write-Host $Characters
+          echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
   job2:
     needs: job1
     runs-on: ubuntu-latest
@@ -42,5 +45,3 @@ jobs:
           
 
           
-          #$Characters = ./Scripts/GetCharactersFromServer.ps1 ${{steps.bnet-auth.outputs.access-token }} ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}}
-          #Write-Host $Characters
