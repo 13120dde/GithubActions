@@ -1,14 +1,27 @@
 name: build
 on: push
+env:
+  ACCOUNT_REGION: eu
+  GAMER_TAG: Brodde#2647
+
 jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
+      access-token: ${{steps.bnet-auth.outputs.access-token}}
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
+    - name: Authenticate with BNet
+      id: bnet-auth
+      shell: pwsh  
+      run: |
+        $AccessToken =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}} ${{env.ACCOUNT_REGION}}
+        echo "::set-output name=access-token::$AccessToken"
+    
     - id: set-matrix
       run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
   job2:
+    
     needs: job1
     runs-on: ubuntu-latest
     strategy:
