@@ -31,15 +31,14 @@ jobs:
         run: |
           $Characters = ./Scripts/GetCharactersFromServer.ps1 ${{steps.bnet-auth.outputs.access-token }} ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}}
           Write-Host $Characters
-          echo "::set-output name=matrix::{\"include\":$Characters}"
-          echo id= ${{matrix.Id}}
-          echo classSlug= ${{matrix.ClassSlug}}
+          echo "::set-output name=matrix:::$Characters"
+          echo id= ${{matrix}}
 
   process-charactes:
     needs: authenticate-bnet
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
+      matrix: ${{needs.authenticate-bnet.outputs.matrix}}
     steps:
       - name: Check Matrix Values
         run: |

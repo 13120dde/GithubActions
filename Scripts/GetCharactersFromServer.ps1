@@ -13,12 +13,17 @@ $ResultContent = ConvertFrom-Json $Result.Content
 $Heroes = $ResultContent.heroes
 
 $HeroesParsed = @()
-foreach($Hero in $Heroes){
-    $HeroesParsed += [PSCustomObject] @{
-        Id = $Hero.id.ToString()
-        ClassSlug = $Hero.classSlug
-    }
+#foreach($Hero in $Heroes){
+#    $HeroesParsed += [PSCustomObject] @{
+#        Id = $Hero.id.ToString()
+#        ClassSlug = $Hero.classSlug
+#    }
+#}
 
+foreach($Hero in $Heroes){
+    $HeroesParsed += $Hero.id.ToString()
 }
-return ConvertTo-Json -Compress $HeroesParsed
+
+return $HeroesParsed
+#return ConvertTo-Json -Compress $HeroesParsed
 
