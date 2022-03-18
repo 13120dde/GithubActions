@@ -11,7 +11,7 @@ env:
   GAMER_TAG: Brodde#2647
 jobs:
   authenticate-bnet:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     outputs:
       access-token: ${{steps.bnet-auth.outputs.access-token}}
       matrix: ${{ steps.get-characters.outputs.matrix }}
