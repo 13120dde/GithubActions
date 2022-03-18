@@ -2,12 +2,12 @@
 $ClientID = $args[0]
 $ClientSecret = $args[1]
 
-$Uri = "https://eu.battle.net/oauth/token"
-$FormRequest = @{
+$Url = "https://eu.battle.net/oauth/token"
+$RequestBody = @{
     client_id  = $ClientID
     client_secret  = $ClientSecret
     grant_type = 'client_credentials'
 }
-$Result = Invoke-WebRequest -Uri $Uri -Method Post -Body $FormRequest
-$token = ConvertFrom-Json $Result.Content
-return $token.access_token
+$Result = Invoke-WebRequest -Uri $Url -Method Post -Body $RequestBody
+$Token = ConvertFrom-Json $Result.Content
+return $Token.access_token
