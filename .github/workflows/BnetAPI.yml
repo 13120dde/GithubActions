@@ -31,10 +31,7 @@ jobs:
         run: |
           $Characters = ./Scripts/GetCharactersFromServer.ps1 ${{steps.bnet-auth.outputs.access-token }} ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}}
           Write-Host $Characters
-          echo "::set-output name=matrix::{\"include\":[{\"Id\":134165191,\"ClassSlug\":\"crusader\"},{\"Id\":136750066,\"ClassSlug\":\"barbarian\"}]}"
-      
-      - name: Check matrix
-        run: Write-Host ${{steps.get-characters.outputs.matrix }}
+          echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
 
   process-charactes:
     needs: authenticate-bnet
@@ -44,8 +41,8 @@ jobs:
     steps:
       - name: Check Matrix Values
         run: |
-          Write-Host ${{matrix.Id}}
-          Write-Host ${{matrix.ClassSlug}}
+          echo ${{ matrix.project }}
+          echo ${{ matrix.config }}
           
 
           
