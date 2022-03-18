@@ -29,7 +29,7 @@ jobs:
 
     - name: Check out repo
       uses: actions/checkout@v2
-      
+
     - name: Get Characters from Server
       id: fetch-characters
       shell: pwsh  
@@ -45,7 +45,8 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
     - id: set-matrix
-      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+#      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+      run: echo "::set-output name=matrix::{\"include\":${{needs.get-characters.outputs.available-characters }}}"
   
   process-characters:
     needs: create-matrix
