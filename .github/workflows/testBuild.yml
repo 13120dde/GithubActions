@@ -24,7 +24,8 @@ jobs:
     needs: authenticate-bnet
     runs-on: ubuntu-latest
     outputs:
-      available-characters: ${{ steps.fetch-characters.outputs.available-characters }}
+    #  available-characters: ${{ steps.fetch-characters.outputs.available-characters }}
+        matrix: ${{ steps.fetch-characters.outputs.matrix }}
     steps:
 
     - name: Check out repo
@@ -36,27 +37,28 @@ jobs:
       run: |
         $Characters = ./Scripts/GetCharactersFromServer.ps1 ${{needs.authenticate-bnet.outputs.access-token }} ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}}
         Write-Host $Characters
-        echo "::set-output name=available-characters::$Characters"
+        echo "::set-output name=matrix::$Characters"
+#        echo "::set-output name=available-characters::$Characters"
   
-  create-matrix:
-    needs: get-characters
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
+#  create-matrix:
+#    needs: get-characters
+#    runs-on: ubuntu-latest
+#    outputs:
+#      matrix: ${{ steps.set-matrix.outputs.matrix }}
+#    steps:
 
-    - id: set-matrix
-      shell: pwsh  
+#    - id: set-matrix
+#      shell: pwsh  
 #      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
-      run: |
-        echo "::set-output name=matrix::${{needs.get-characters.outputs.available-characters }}"
-        Write-Host "hej"
+#      run: |
+#        echo "::set-output name=matrix::${{needs.get-characters.outputs.available-characters }}"
+#        Write-Host "hej"
   
   process-characters:
-    needs: create-matrix
+    needs: get-characters
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJson(needs.create-matrix.outputs.matrix)}}
+      matrix: ${{fromJson(needs.get-characters.outputs.matrix)}}
     steps:
     - run: echo ${{ matrix.project }}
     - run: echo ${{ matrix.config }}
