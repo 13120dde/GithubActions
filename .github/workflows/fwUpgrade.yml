@@ -1,11 +1,13 @@
 
 name: Firmware Upgrade
 on:  
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-  workflow_dispatch:
+  #push:
+  #  branches: [ master ]
+  #pull_request:
+  #  branches: [ master ]
+  #workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * FRI'
 
 jobs:
   upgrade-firmware:

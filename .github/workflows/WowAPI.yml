@@ -25,18 +25,13 @@ jobs:
        
           $AccessToken =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}}
           Write-Host "accToken $AccessToken"
+          echo "::set-output name=access-token::$(echo ${AccessToken})"
           echo "::set-output name=access-token2::$AccessToken"
           echo "::set-output name=access-token3::BAJS"
       
       - name: Get Characters from Server
         run: |
-        
-          Write-Host "here2"
-          $AccessToken2 = ${{ steps.bnet-auth.outputs.access-token2 }}
-          Write-Host "accToken2 $AccessToken2"
 
-          Write-Host "here3"
-          $AccessToken3 = ${{ steps.bnet-auth.outputs.access-token3 }}
-          Write-Host "accToken3 $AccessToken3"
+          ./Scripts/GetCharactersFromServer.ps1 ${{steps.bnet-auth.outputs.access-token }} ${{steps.bnet-auth.outputs.access-token2 }} ${{steps.bnet-auth.outputs.access-token3 }}
 
           
