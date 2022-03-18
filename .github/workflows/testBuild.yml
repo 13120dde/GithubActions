@@ -49,7 +49,7 @@ jobs:
       shell: pwsh  
 #      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
       run: |
-        echo "::set-output name=matrix::{\"include\":${{needs.get-characters.outputs.available-characters }}}"
+        echo "::set-output name=matrix::${{needs.get-characters.outputs.available-characters }}"
         Write-Host "hej"
   
   process-characters:
