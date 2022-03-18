@@ -10,11 +10,11 @@ env:
   ACCOUNT_REGION: eu
   GAMER_TAG: Brodde#2647
 jobs:
-  authenticate-bnet:
+  job1:
     runs-on: ubuntu-latest
     outputs:
       access-token: ${{steps.bnet-auth.outputs.access-token}}
-      matrix: ${{ steps.get-characters.outputs.matrix }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
     
       - name: Check out repo
@@ -28,23 +28,20 @@ jobs:
           echo "::set-output name=access-token::$AccessToken"
           
       - name: Get Characters from Server
-        id: get-characters
+        id: set-matrix
         shell: pwsh  
         run: |
           $Characters = ./Scripts/GetCharactersFromServer.ps1 ${{steps.bnet-auth.outputs.access-token }} ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}}
           Write-Host $Characters
           echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
-
-  process-charactes:
-    needs: authenticate-bnet
+  job2:
+    needs: job1
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
+      matrix: ${{fromJson(needs.job1.outputs.matrix)}}
     steps:
-      - name: Check Matrix Values
-        run: |
-          echo ${{ matrix.project }}
-          echo ${{ matrix.config }}
+    - run: echo ${{ matrix.project }}
+    - run: echo ${{ matrix.config }}
           
 
           
