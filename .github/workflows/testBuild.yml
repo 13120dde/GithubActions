@@ -24,7 +24,7 @@ jobs:
     needs: authenticate-bnet
     runs-on: ubuntu-latest
     outputs:
-      available-characters: ${{ steps.get-characters.outputs.characters }}
+      available-characters: ${{ steps.get-characters.outputs.available-characters }}
     steps:
 
     - name: Check out repo
@@ -36,7 +36,7 @@ jobs:
       run: |
         $Characters = ./Scripts/GetCharactersFromServer.ps1 ${{needs.authenticate-bnet.outputs.access-token }} ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}}
         Write-Host $Characters
-        echo "::set-output name=characters::$Characters"
+        echo "::set-output name=available-characters::$Characters"
   
   create-matrix:
     needs: get-characters
@@ -51,6 +51,7 @@ jobs:
         Write-Host "json: $Json"
         echo ${{needs.get-characters.outputs.available-characters }}
         echo "::set-output name=matrix::{\"include\":$Json}"
+        Write-Host "hej"
   
   process-characters:
     needs: create-matrix
