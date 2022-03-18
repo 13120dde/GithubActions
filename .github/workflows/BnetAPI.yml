@@ -14,7 +14,7 @@ jobs:
     runs-on: windows-latest
     outputs:
       access-token: ${{steps.bnet-auth.outputs.access-token}}
-      characters: ${{steps.get-characters.outputs.characters}}
+      matrix: ${{steps.get-characters.outputs.matrix}}
     steps:
     
       - name: Check out repo
@@ -31,5 +31,18 @@ jobs:
         run: |
           $Characters = ./Scripts/GetCharactersFromServer.ps1 ${{steps.bnet-auth.outputs.access-token }} ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}}
           Write-Host $Characters
+          echo "::set-output name=matrix::$Characters"
+
+  process-charactes:
+    needs: authenticate-bnet
+    runs-on: windows-latest
+    strategy:
+      matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
+    steps:
+      - name: Check Matrix Values
+        run: |
+          Write-Host ${{matrix.Id}}
+          Write-Host ${{matrix.ClassSlug}}
+          
 
           
