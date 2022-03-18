@@ -37,7 +37,9 @@ jobs:
       run: |
         $Characters = ./Scripts/GetCharactersFromServer.ps1 ${{needs.authenticate-bnet.outputs.access-token }} ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}}
         Write-Host $Characters
-        echo "::set-output name=matrix::$Characters"
+        echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+#       echo "::set-output name=matrix::$Characters"
+
 #        echo "::set-output name=available-characters::$Characters"
   
 #  create-matrix:
