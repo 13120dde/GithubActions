@@ -20,5 +20,5 @@ foreach($Hero in $Heroes){
     }
 
 }
-return ConvertTo-Json $HeroesParsed
+return ConvertTo-Json --compress $HeroesParsed
 
