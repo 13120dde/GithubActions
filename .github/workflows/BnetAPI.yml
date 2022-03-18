@@ -35,7 +35,7 @@ jobs:
 
   process-charactes:
     needs: authenticate-bnet
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
     steps:
