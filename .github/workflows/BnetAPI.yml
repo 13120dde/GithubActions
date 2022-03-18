@@ -14,7 +14,7 @@ jobs:
     runs-on: windows-latest
     outputs:
       access-token: ${{steps.bnet-auth.outputs.access-token}}
-      matrix: ${{steps.get-characters.outputs.matrix}}
+      matrix: ${{ steps.get-characters.outputs.matrix }}
     steps:
     
       - name: Check out repo
@@ -37,8 +37,7 @@ jobs:
     needs: authenticate-bnet
     runs-on: ubuntu-latest
     strategy:
-      matrix: 
-        package: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
+      matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
     steps:
       - name: Check Matrix Values
         run: |
