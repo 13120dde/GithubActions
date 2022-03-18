@@ -1,8 +1,10 @@
 ﻿
 $AccessToken = "Bearer "+$args[0]
+#$AccessToken = "Bearer EUFSlH3SMa8N5qJiCVv7RixovrezD8tySk"
 $Region = $args[1]
+#$Region ="eu"
 $GAMER_PROFILE =[System.Web.HTTPUtility]::UrlEncode($args[2])
-
+#$GAMER_PROFILE ="Brodde%232647"
 $Url = "https://$Region.api.blizzard.com/d3/profile/$GAMER_PROFILE/?locale=en_US"
 Write-Host $Url
 Write-Host "accToken: $AccessToken"
@@ -16,9 +18,15 @@ $HeroesParsed = @()
 foreach($Hero in $Heroes){
     $HeroesParsed += [PSCustomObject] @{
         Id = $Hero.id.ToString()
-        ClassSlug = $Hero.classSlug
+
     }
 }
 
-return ConvertTo-Json -Compress $HeroesParsed
+$s = "{\`"include\`":["
+foreach($Hero in $HeroesParsed){
+    $s+="{\`"Id\`":\`""+$Hero.Id+"\`"},"
+}
+$s = $s.Substring(0, $s.Length-1)
+$s +="]}"
+return $s
 
