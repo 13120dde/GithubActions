@@ -22,12 +22,12 @@ jobs:
       - name: Authenticate with BNet
         id: bnet-auth
         run: |
-          $AccessToken =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}} $ACCOUNT_REGION
+          $AccessToken =  ./Scripts/GetBnetToken.ps1 ${{secrets.WOW_CLIENT_ID}} ${{secrets.WOW_CLIENT_SECRET}} ${{env.ACCOUNT_REGION}}
           echo "::set-output name=access-token::$AccessToken"
           
       - name: Get Characters from Server
         id: get-characters
         run: |
-          $Characters = ./Scripts/GetCharactersFromServer.ps1 ${{steps.bnet-auth.outputs.access-token }} $ACCOUNT_REGION
+          $Characters = ./Scripts/GetCharactersFromServer.ps1 ${{steps.bnet-auth.outputs.access-token }} ${{env.ACCOUNT_REGION}}
 
           
