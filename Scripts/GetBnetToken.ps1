@@ -1,8 +1,9 @@
 ﻿
 $ClientID = $args[0]
 $ClientSecret = $args[1]
+$Region = $args[2]
 
-$Url = "https://eu.battle.net/oauth/token"
+$Url = "https://$Region.battle.net/oauth/token"
 $RequestBody = @{
     client_id  = $ClientID
     client_secret  = $ClientSecret
