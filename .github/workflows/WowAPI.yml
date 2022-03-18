@@ -31,12 +31,15 @@ jobs:
       
       - name: Get Characters from Server
         run: |
+          Write-Host "here"
           $AccessToken = ${{ steps.bnet-auth.outputs.access-token }}
           Write-Host "accToken $AccessToken"
 
+          Write-Host "here2"
           $AccessToken2 = ${{ steps.bnet-auth.outputs.access-token2 }}
           Write-Host "accToken2 $AccessToken2"
 
+          Write-Host "here3"
           $AccessToken3 = ${{ steps.bnet-auth.outputs.access-token3 }}
           Write-Host "accToken3 $AccessToken3"
 
