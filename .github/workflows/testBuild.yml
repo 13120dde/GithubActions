@@ -24,7 +24,7 @@ jobs:
     needs: authenticate-bnet
     runs-on: ubuntu-latest
     outputs:
-      available-characters: ${{ steps.get-characters.outputs.available-characters }}
+      available-characters: ${{ steps.fetch-characters.outputs.available-characters }}
     steps:
 
     - name: Check out repo
