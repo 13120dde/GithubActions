@@ -49,10 +49,7 @@ jobs:
       shell: pwsh  
 #      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
       run: |
-        $JSon = ${{needs.get-characters.outputs.available-characters }}
-        Write-Host "json: $Json"
-        echo ${{needs.get-characters.outputs.available-characters }}
-        echo "::set-output name=matrix::{\"include\":$Json}"
+        echo "::set-output name=matrix::{\"include\":${{needs.get-characters.outputs.available-characters }}}"
         Write-Host "hej"
   
   process-characters:
