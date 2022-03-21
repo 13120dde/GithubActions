@@ -25,7 +25,7 @@ jobs:
           }
           $Result = Invoke-WebRequest -Uri $Url -Method Post -Body $RequestBody
           $Token = ConvertFrom-Json $Result.Content
-          $access_token = $Token.access_token"
+          $access_token = $Token.access_token
           echo "::set-output name=access-token::$access_token"
   
       - name: Get Characters from Server
