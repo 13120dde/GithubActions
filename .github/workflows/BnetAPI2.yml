@@ -31,7 +31,7 @@ jobs:
         id: fetch-characters
         run: |
         
-          $AccessToken = "Bearer "+${{needs.authenticate-bnet.outputs.access-token }}
+          $AccessToken = "Bearer "+${{steps.bnet-auth.outputs.access-token }}
           $Region = ${{env.ACCOUNT_REGION}}
           $GAMER_PROFILE =[System.Web.HTTPUtility]::UrlEncode(${{env.GAMER_TAG}})
 
