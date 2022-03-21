@@ -21,12 +21,5 @@ foreach($Hero in $Heroes){
 
     }
 }
-
-$s = "{\`"include\`":["
-foreach($Hero in $HeroesParsed){
-    $s+="{\`"Id\`":\`""+$Hero.Id+"\`"},"
-}
-$s = $s.Substring(0, $s.Length-1)
-$s +="]}"
-return $s
+ return ConvertTo-Json -InputObject $HeroesParsed
 

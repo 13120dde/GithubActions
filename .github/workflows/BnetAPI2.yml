@@ -1,0 +1,56 @@
+name: build
+on: push
+env:
+  ACCOUNT_REGION: eu
+  GAMER_TAG: Brodde#2647
+jobs:
+  authenticate-bnet:
+    runs-on: windows-latest
+    outputs:
+      access-token: ${{steps.bnet-auth.outputs.access-token}}
+    steps:
+
+      - name: Check out repo
+        uses: actions/checkout@v2
+
+      - name: Authenticate with BNet
+        id: bnet-auth
+        run: |
+          $Region = ${{env.ACCOUNT_REGION}}
+          $Url = "https://"+$Region+".battle.net/oauth/token"
+
+          $RequestBody = @{
+              client_id  = ${{secrets.WOW_CLIENT_ID}}
+              client_secret  = ${{secrets.WOW_CLIENT_SECRET}}
+              grant_type = 'client_credentials'
+          }
+          $Result = Invoke-WebRequest -Uri $Url -Method Post -Body $RequestBody
+          $Token = ConvertFrom-Json $Result.Content
+          echo "::set-output name=access-token::$Token.access_token"
+  
+      - name: Get Characters from Server
+        id: fetch-characters
+        run: |
+        
+          $AccessToken = "Bearer "+${{needs.authenticate-bnet.outputs.access-token }}
+          $Region = ${{env.ACCOUNT_REGION}}
+          $GAMER_PROFILE =[System.Web.HTTPUtility]::UrlEncode(${{env.GAMER_TAG}})
+
+          $Url = "https://$Region.api.blizzard.com/d3/profile/$GAMER_PROFILE/?locale=en_US"
+          Write-Host $Url
+          Write-Host "accToken: $AccessToken"
+
+          $Result = Invoke-WebRequest -Uri $Url -Method Get -Headers @{'Authorization' = $AccessToken}
+
+          $ResultContent = ConvertFrom-Json $Result.Content
+          $Heroes = $ResultContent.heroes
+
+          $HeroesParsed = @()
+          foreach($Hero in $Heroes){
+              $HeroesParsed += [PSCustomObject] @{
+                  Id = $Hero.id.ToString()
+
+              }
+          }
+          $HP ConvertTo-Json -InputObject $HeroesParsed
+          Write-Host $HP
