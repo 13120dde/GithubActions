@@ -49,9 +49,19 @@ jobs:
           $HeroesParsed = @()
           foreach($Hero in $Heroes){
               $HeroesParsed += [PSCustomObject] @{
-                  Id = $Hero.id.ToString()
+                  Id = $Hero.id
+                  ClassSlug = $Hero.classSlug
 
               }
           }
-          $HP ConvertTo-Json -InputObject $HeroesParsed
-          Write-Host $HP
+          $Matrix = ConvertTo-Json -Compress -InputObject $HeroesParsed
+          Write-Host $Matrix
+          echo "::set-output name=matrix::$Matrix"
+  
+  job2:
+    needs: authenticate-bnet
+    runs-on: windows-latest
+    strategy:
+      matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
+    steps:
+      - run: echo ${{ matrix.Id }} ${{ matrix.ClassSlug }}
