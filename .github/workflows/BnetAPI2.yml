@@ -1,4 +1,4 @@
-name: build
+name: bnetAPI2
 on: push
 env:
   ACCOUNT_REGION: eu

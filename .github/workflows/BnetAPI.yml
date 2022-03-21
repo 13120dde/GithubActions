@@ -1,4 +1,4 @@
-name: build
+name: bnetAPI
 on: push
 env:
   ACCOUNT_REGION: eu
@@ -22,6 +22,6 @@ jobs:
       - name: Get Characters from Server
         id: fetch-characters
         run: |
-          $Characters = ./Scripts/GetCharactersFromServer.ps1 ${{needs.authenticate-bnet.outputs.access-token }} ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}}
+          $Characters = ./Scripts/GetCharactersFromServer.ps1 ${{needs.bnet-auth.outputs.access-token }} ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}}
           Write-Host $Characters
       
