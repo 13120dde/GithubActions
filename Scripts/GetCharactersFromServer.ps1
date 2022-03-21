@@ -17,7 +17,8 @@ $Heroes = $ResultContent.heroes
 $HeroesParsed = @()
 foreach($Hero in $Heroes){
     $HeroesParsed += [PSCustomObject] @{
-        Id = $Hero.id.ToString()
+        Id = $Hero.id
+        ClassSlug = $Hero.ClassSlug
 
     }
 }

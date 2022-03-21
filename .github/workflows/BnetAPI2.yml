@@ -32,10 +32,10 @@ jobs:
         id: fetch-characters
         run: |
         
-          $AccessToken = "Bearer "+${{steps.bnet-auth.outputs.access-token }}
+          $AccessToken = "Bearer ${{steps.bnet-auth.outputs.access-token }}"
           $Region = ${{env.ACCOUNT_REGION}}
           $Tag = ${{env.GAMER_TAG}}
-          $GAMER_PROFILE =[System.Web.HTTPUtility]::UrlEncode($Tagd)
+          $GAMER_PROFILE =[System.Web.HTTPUtility]::UrlEncode($Tag)
 
           $Url = "https://$Region.api.blizzard.com/d3/profile/$GAMER_PROFILE/?locale=en_US"
           Write-Host $Url
