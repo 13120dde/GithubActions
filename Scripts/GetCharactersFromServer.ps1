@@ -25,6 +25,6 @@ foreach($Hero in $Heroes){
 $myObject = [PSCustomObject]@{
     include = $HeroesParsed
 }
- return ConvertTo-Json -InputObject -Compress $myObject
+ return ConvertTo-Json  -Compress -InputObject $myObject
 
 

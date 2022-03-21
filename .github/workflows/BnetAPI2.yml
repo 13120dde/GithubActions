@@ -19,8 +19,8 @@ jobs:
 
           $Url = "https://${{env.ACCOUNT_REGION}}.battle.net/oauth/token"
           $RequestBody = @{
-              client_id  = ${{secrets.WOW_CLIENT_ID}}
-              client_secret  = ${{secrets.WOW_CLIENT_SECRET}}
+              client_id  = '${{secrets.WOW_CLIENT_ID}}'
+              client_secret  = '${{secrets.WOW_CLIENT_SECRET}}'
               grant_type = 'client_credentials'
           }
           $Result = Invoke-WebRequest -Uri $Url -Method Post -Body $RequestBody
