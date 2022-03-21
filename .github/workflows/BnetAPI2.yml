@@ -25,7 +25,8 @@ jobs:
           }
           $Result = Invoke-WebRequest -Uri $Url -Method Post -Body $RequestBody
           $Token = ConvertFrom-Json $Result.Content
-          echo "::set-output name=access-token::$Token.access_token"
+          $access_token = $Token.access_token"
+          echo "::set-output name=access-token::$access_token"
   
       - name: Get Characters from Server
         id: fetch-characters
@@ -33,7 +34,8 @@ jobs:
         
           $AccessToken = "Bearer "+${{steps.bnet-auth.outputs.access-token }}
           $Region = ${{env.ACCOUNT_REGION}}
-          $GAMER_PROFILE =[System.Web.HTTPUtility]::UrlEncode(${{env.GAMER_TAG}})
+          $Tag = ${{env.GAMER_TAG}}
+          $GAMER_PROFILE =[System.Web.HTTPUtility]::UrlEncode($Tagd)
 
           $Url = "https://$Region.api.blizzard.com/d3/profile/$GAMER_PROFILE/?locale=en_US"
           Write-Host $Url
