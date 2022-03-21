@@ -1,8 +1,8 @@
 name: bnetAPI2
 on: push
 env:
-  ACCOUNT_REGION: eu
-  GAMER_TAG: Brodde#2647
+  ACCOUNT_REGION: "eu"
+  GAMER_TAG: "Brodde#2647"
 jobs:
   authenticate-bnet:
     runs-on: windows-latest
