@@ -8,6 +8,8 @@ jobs:
     runs-on: windows-latest
     outputs:
       access-token: ${{steps.bnet-auth.outputs.access-token}}
+      matrix: ${{steps.fetch-characters.outputs.matrix}}
+      
     steps:
 
       - name: Check out repo
@@ -33,8 +35,8 @@ jobs:
         run: |
         
           $AccessToken = "Bearer ${{steps.bnet-auth.outputs.access-token }}"
-          $Region = ${{env.ACCOUNT_REGION}}
-          $Tag = ${{env.GAMER_TAG}}
+          $Region = "${{env.ACCOUNT_REGION}}"
+          $Tag = "${{env.GAMER_TAG}}"
           $GAMER_PROFILE =[System.Web.HTTPUtility]::UrlEncode($Tag)
 
           $Url = "https://$Region.api.blizzard.com/d3/profile/$GAMER_PROFILE/?locale=en_US"
@@ -54,9 +56,13 @@ jobs:
 
               }
           }
-          $Matrix = ConvertTo-Json -Compress -InputObject $HeroesParsed
-          Write-Host $Matrix
-          echo "::set-output name=matrix::$Matrix"
+          
+          $Matrix = [PSCustomObject]@{
+              include = $HeroesParsed
+          }
+          $MatrixJson = ConvertTo-Json -Compress -InputObject $Matrix
+          Write-Host $$MatrixJson
+          echo "::set-output name=matrix::$$MatrixJson"
   
   job2:
     needs: authenticate-bnet
