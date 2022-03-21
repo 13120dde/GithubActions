@@ -21,5 +21,10 @@ foreach($Hero in $Heroes){
 
     }
 }
- return ConvertTo-Json -InputObject $HeroesParsed
+
+$myObject = [PSCustomObject]@{
+    include = $HeroesParsed
+}
+ return ConvertTo-Json -InputObject -Compress $myObject
+
 

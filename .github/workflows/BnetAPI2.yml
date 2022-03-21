@@ -17,7 +17,7 @@ jobs:
         id: bnet-auth
         run: |
 
-          $Url = "https://"+${{env.ACCOUNT_REGION}}+".battle.net/oauth/token"
+          $Url = "https://${{env.ACCOUNT_REGION}}.battle.net/oauth/token"
           $RequestBody = @{
               client_id  = ${{secrets.WOW_CLIENT_ID}}
               client_secret  = ${{secrets.WOW_CLIENT_SECRET}}
