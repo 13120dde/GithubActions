@@ -33,7 +33,7 @@ jobs:
     strategy:
       matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
     outputs:
-      json-path: ${{ steps.clean-character-data.outputs.file-path }}
+      file-path: ${{ steps.clean-character-data.outputs.file-path }}
     steps:
         
       - name: Check out repo
