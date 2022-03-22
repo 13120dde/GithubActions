@@ -16,3 +16,9 @@ $GAMER_PROFILE ="Brodde%232647"
 $AccessToken ="Bearer EUrOo6zeFePgP7LFps3aiS0mrHNGPeRqYH"
 $HeroID = 134165191
 $ClassSlug = "crusader"
+$UrlHero = "https://$Region.api.blizzard.com/d3/profile/$GAMER_PROFILE/hero/$HeroID?locale=en_US"
+$Result = Invoke-WebRequest -Uri $UrlHero -Method Get -Headers @{'Authorization' = $AccessToken}
+
+$HeroContent = ConvertFrom-Json -InputObject $Result.Content
+
+Write-Host $HeroContent
