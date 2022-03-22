@@ -126,4 +126,4 @@ $Hero = [PSCustomObject]@{
 }
 
 $Hero | Get-Member
-return ConvertTo-Json -Compress -InputObject $Hero -Depth 100
+return ConvertTo-Json -Compress -InputObject $Hero -Depth 10
