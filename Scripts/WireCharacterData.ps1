@@ -90,7 +90,7 @@ $ClassSlug = $args[4]
 #$HeroId = "154019444"
 #$ClassSlug = "necromancer"
 
-Write-Host "Wiring data for Write-Host $HeroID $ClassSlug"
+Write-Host "Wiring data for $HeroID $ClassSlug"
 
 ### FETCH DATA ###
 $UrlHero = "https://$Region.api.blizzard.com/d3/profile/$GAMER_PROFILE/hero/"+$HeroId+"?locale=en_US"
