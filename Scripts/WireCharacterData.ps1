@@ -58,8 +58,6 @@ function Get-HeroItems()
     [hashtable]$ItemTableClean=@{}
     foreach($Item in $ItemTableRaw.GetEnumerator())
     {
-        Write-Host $Item.Key
-        Write-Host $Item.Value
         $Value = [PSCustomObject]@{
             Name = $Item.Value.name;
             ItemLevel = $Item.Value.itemLevel;
@@ -85,17 +83,14 @@ $AccessToken = "Bearer "+$args[2]
 $HeroID = $args[3].ToString()
 $ClassSlug = $args[4]
 
-Write-Host $Region
-Write-Host $GAMER_PROFILE
-Write-Host $AccessToken
-Write-Host $HeroID
-Write-Host $ClassSlug
 
 #$Region = "eu"
 #$GAMER_PROFILE ="Brodde%232647"
 #$AccessToken ="Bearer EUrOo6zeFePgP7LFps3aiS0mrHNGPeRqYH"
-#$HeroId = "134165191"
-#$ClassSlug = "crusader"
+#$HeroId = "154019444"
+#$ClassSlug = "necromancer"
+
+Write-Host "Wiring data for Write-Host $HeroID $ClassSlug"
 
 ### FETCH DATA ###
 $UrlHero = "https://$Region.api.blizzard.com/d3/profile/$GAMER_PROFILE/hero/"+$HeroId+"?locale=en_US"
@@ -125,5 +120,7 @@ $Hero = [PSCustomObject]@{
     Gear = $ItemsCleaned
 }
 
-$Hero | Get-Member
-return ConvertTo-Json -Compress -InputObject $Hero -Depth 10
+$HeroJson = ConvertTo-Json -Compress -InputObject $Hero -Depth 10
+Write-Host "HERO JSON:"
+Write-Host $HeroJson
+return $HeroJson
