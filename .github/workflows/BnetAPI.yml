@@ -34,6 +34,7 @@ jobs:
       matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
     outputs:
       file-path: ${{ steps.clean-character-data.outputs.file-path }}
+      file-name: ${{ steps.clean-character-data.ouputs.file-name }}
     steps:
         
       - name: Check out repo
@@ -56,12 +57,13 @@ jobs:
           dir artifacts/characters
 
           echo "set-output:: name:file-path::$FilePath"
+          echo "set-output:: name:file-name::$FileName"
 
       - name: Upload Character Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact
-          path: ${{ steps.clean-character-data.ouputs.file-path }}
+          path: ${{ steps.clean-character-data.ouputs.file-name }}
 
 
 
