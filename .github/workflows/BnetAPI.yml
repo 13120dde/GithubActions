@@ -43,6 +43,12 @@ jobs:
           $CharacterDataJson = ./Scripts/WireCharacterData.ps1 ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}} ${{needs.authenticate-bnet.outputs.access-token }} ${{ matrix.Id }} ${{ matrix.ClassSlug }}
           $CharacterData = ConvertFrom-Json -InputObject $CharacterDataJson
           pwd
+          mkdir artifacts/characters
+          $FilePath = Get-Location+"/artifacts/characters/"+$CharacterData.Name+"_"+$CharacterData.Id+".json"
+          Write-Host "Path: $FilePath"
+          $CharacterData | ConvertTo-Json | Out-File $FilePath
+          dir artifacts/characters
+
 
 
   process-character-data:
