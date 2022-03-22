@@ -10,7 +10,7 @@ Write-Host $Url
 Write-Host "accToken: $AccessToken"
 
 $Result = Invoke-WebRequest -Uri $Url -Method Get -Headers @{'Authorization' = $AccessToken}
-
+$Result
 $ResultContent = ConvertFrom-Json $Result.Content
 $Heroes = $ResultContent.heroes
 
@@ -24,7 +24,6 @@ foreach($Hero in $Heroes){
 $myObject = [PSCustomObject]@{
     include = $HeroesParsed
 }
-Write-Host $myObject
 return ConvertTo-Json  -Compress -InputObject $myObject
 
 
