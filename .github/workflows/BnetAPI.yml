@@ -46,7 +46,7 @@ jobs:
          
           pwd
           mkdir artifacts/characters
-          $FilePath = Get-Location+"/artifacts/characters/"+$CharacterData.Name+"_"+$CharacterData.Id+".json"
+          $FilePath = Get-Location.ToString()+"/artifacts/characters/"+$CharacterData.Name+"_"+$CharacterData.Id+".json"
           Write-Host "Path: $FilePath"
           $CharacterData | ConvertTo-Json | Out-File $FilePath
           dir artifacts/characters
