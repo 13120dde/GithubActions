@@ -34,7 +34,7 @@ jobs:
       matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
     outputs:
       file-path: ${{ steps.clean-character-data.outputs.file-path }}
-      file-name: ${{ steps.clean-character-data.ouputs.file-name }}
+      file-name: ${{ steps.clean-character-data.outputs.file-name }}
     steps:
         
       - name: Check out repo
@@ -80,5 +80,5 @@ jobs:
       - name: Process character Data
         run: |
           pwd
-          dir ${{needs.wire-character-data.output.file-path}}
+          dir ${{needs.wire-character-data.outputs.file-path}}
       
