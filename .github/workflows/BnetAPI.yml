@@ -56,8 +56,14 @@ jobs:
           $CharacterData | ConvertTo-Json | Out-File $FileName
           dir artifacts/characters
 
-          echo "set-output:: name:file-path::$FilePath"
-          echo "set-output:: name:file-name::$FileName"
+          echo "set-output:: name=file-path::$FilePath"
+          echo "set-output:: name=file-name::$FileName"
+
+      - run: |
+            $FilePath = ${{ steps.clean-character-data.outputs.file-path }}
+            $FileName = ${{ steps.clean-character-data.outputs.file-name }}
+            Write-Host "filePath: $FilePath"
+            Write-Host "fileName: $FileName"
 
       - name: Upload Character Artifacts
         uses: actions/upload-artifact@v2
