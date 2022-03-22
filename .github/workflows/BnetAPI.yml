@@ -43,4 +43,13 @@ jobs:
         id: clean-character-data
         run: |
           $CharacterData = ./Scripts/WireCharacterData.ps1 ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}} ${{needs.authenticate-bnet.outputs.access-token }} ${{ matrix.Id }} ${{ matrix.ClassSlug }}
-          echo "::set-output name=matrix::$CharacterData"
+          echo "::set-output name=character-json::$CharacterData"
+
+  process-character-data:
+    needs: wire-character-data
+    runs-on: windows-latest
+    steps:
+      - name: Process character Data
+        run: |
+            $Json =  ${{needs.wire-character-data.outputs.character-json}}
+            Write-Host $Json
