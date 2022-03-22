@@ -32,6 +32,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
+      fail-fast: false
     outputs:
       file-path: ${{ steps.clean-character-data.outputs.file-path }}
       file-name: ${{ steps.clean-character-data.outputs.file-name }}
