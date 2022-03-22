@@ -50,9 +50,9 @@ jobs:
           mkdir artifacts/characters
           $CurrentDir = Get-Location
           $FilePath = $CurrentDir.ToString()+"/artifacts/characters/"
-
+          $FileName = $FilePath+$CharacterData.Name+"_"+$CharacterData.Id+".json"
           Write-Host "Path: $FilePath"
-          $CharacterData | ConvertTo-Json | Out-File $FilePath+$CharacterData.Name+"_"+$CharacterData.Id+".json"
+          $CharacterData | ConvertTo-Json | Out-File $FileName
           dir artifacts/characters
 
           echo "set-output:: name:file-path::$FilePath"
