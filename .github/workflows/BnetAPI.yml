@@ -42,8 +42,7 @@ jobs:
         run: |
           $CharacterDataJson = ./Scripts/WireCharacterData.ps1 ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}} ${{needs.authenticate-bnet.outputs.access-token }} ${{ matrix.Id }} ${{ matrix.ClassSlug }}
           $CharacterData = ConvertFrom-Json -InputObject $CharacterDataJson
-          cd :c
-          dir
+          pwd
 
 
   process-character-data:
