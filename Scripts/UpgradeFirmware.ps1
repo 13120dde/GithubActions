@@ -9,3 +9,14 @@ write-host "`tAT: $atConfiguration"
 write-host "`tSite: $siteName"
 write-host "`tUser: $user"
 write-host "`tPassword: $password"
+
+$Char = [PSCustomObject]@{
+    Name = "Value"
+    Id = "aaa"
+}
+
+$CurrentDir = Get-Location
+Write-Host $FilePath
+$FilePath = $CurrentDir.ToString()+"artifacts/characters/"+$Char.Name+"_"+$Char.Id+".json"
+
+Write-Host $FilePath
