@@ -49,9 +49,9 @@ jobs:
           $CharacterData = ConvertFrom-Json -InputObject $CharacterDataJson
          
           pwd
-          mkdir artifacts/characters
+          mkdir artifacts\characters
           $CurrentDir = Get-Location
-          $FilePath = $CurrentDir.ToString()+"/artifacts/characters/"
+          $FilePath = $CurrentDir.ToString()+"\artifacts\characters\"
           $FileName = $FilePath+$CharacterData.Name+"_"+$CharacterData.Id+".json"
           Write-Host "Path: $FilePath"
           $CharacterData | ConvertTo-Json | Out-File $FileName
@@ -60,11 +60,11 @@ jobs:
           echo "::set-output name=file-path::$FilePath"
           echo "::set-output name=file-name::$FileName"
           
-      - run: |
-            $FilePath = ${{ steps.clean-character-data.outputs.file-path }}
-            $FileName = ${{ steps.clean-character-data.outputs.file-name }}
-            Write-Host "filePath: $FilePath"
-            Write-Host "fileName: $FileName"
+   #   - run: |
+    #        $FilePath = ${{ steps.clean-character-data.outputs.file-path }}
+     #       $FileName = ${{ steps.clean-character-data.outputs.file-name }}
+      #      Write-Host "filePath: $FilePath"
+       #     Write-Host "fileName: $FileName"
 
       - name: Upload Character Artifacts
         uses: actions/upload-artifact@v2
