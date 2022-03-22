@@ -1,5 +1,5 @@
 ﻿$AccessToken = "Bearer "+$args[0]
-#$AccessToken = "Bearer EUFSlH3SMa8N5qJiCVv7RixovrezD8tySk"
+#$AccessToken = "Bearer EUrOo6zeFePgP7LFps3aiS0mrHNGPeRqYH"
 $Region = $args[1]
 #$Region ="eu"
 $GAMER_PROFILE =[System.Web.HTTPUtility]::UrlEncode($args[2])
@@ -9,7 +9,6 @@ Write-Host $Url
 Write-Host "at: $AccessToken"
 
 $Result = Invoke-WebRequest -Uri $Url -Method Get -Headers @{'Authorization' = $AccessToken}
-$Result
 $ResultContent = ConvertFrom-Json $Result.Content
 $Heroes = $ResultContent.heroes
 
@@ -21,10 +20,11 @@ foreach($Hero in $Heroes){
 
     }
 }
-Write-Host "heroes parsed: $HeroesParsed"
+
 $Matrix = [PSCustomObject]@{
-    include = $HeroesParsed
+    include = $null
 }
+$Matrix.include = $HeroesParsed
 
 Write-Host "matrix: $Matrix"
 return ConvertTo-Json  -Compress -InputObject $Matrix
