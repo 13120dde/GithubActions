@@ -32,6 +32,8 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
+    outputs:
+      json-path: ${{ steps.clean-character-data.outputs.file-path }}
     steps:
         
       - name: Check out repo
@@ -47,18 +49,34 @@ jobs:
           pwd
           mkdir artifacts/characters
           $CurrentDir = Get-Location
-          $FilePath = $CurrentDir.ToString()+"/artifacts/characters/"+$CharacterData.Name+"_"+$CharacterData.Id+".json"
+          $FilePath = $CurrentDir.ToString()+"/artifacts/characters/"
 
           Write-Host "Path: $FilePath"
-          $CharacterData | ConvertTo-Json | Out-File $FilePath
+          $CharacterData | ConvertTo-Json | Out-File $FilePath+$CharacterData.Name+"_"+$CharacterData.Id+".json"
           dir artifacts/characters
 
+          echo "set-output:: name:file-path::$FilePath"
+
+      - name: Upload Character Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: ${{ steps.clean-character-data.ouputs.file-path }}
 
 
+
+ # process-character-data:
+ #   needs: wire-character-data
+ #   runs-on: windows-latest
+ #   steps:
+ #     - name: Process character Data
+ #       run: |
   process-character-data:
     needs: wire-character-data
     runs-on: windows-latest
     steps:
       - name: Process character Data
         run: |
-    
+          pwd
+          dir ${{needs.wire-character-data.output.file-path}}
+      
