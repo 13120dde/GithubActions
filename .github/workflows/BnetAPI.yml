@@ -63,7 +63,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact
-          path: ${{ steps.clean-character-data.ouputs.file-name }}
+          path: ${{ steps.clean-character-data.outputs.file-name }}
 
 
 
