@@ -1,5 +1,4 @@
-﻿
-$AccessToken = "Bearer "+$args[0]
+﻿$AccessToken = "Bearer "+$args[0]
 #$AccessToken = "Bearer EUFSlH3SMa8N5qJiCVv7RixovrezD8tySk"
 $Region = $args[1]
 #$Region ="eu"
@@ -10,20 +9,20 @@ Write-Host $Url
 Write-Host "accToken: $AccessToken"
 
 $Result = Invoke-WebRequest -Uri $Url -Method Get -Headers @{'Authorization' = $AccessToken}
-$Result
+
 $ResultContent = ConvertFrom-Json $Result.Content
 $Heroes = $ResultContent.heroes
 
 $HeroesParsed = @()
 foreach($Hero in $Heroes){
     $HeroesParsed += [PSCustomObject] @{
-        Id = $Hero.id.ToString()
+        Id = $Hero.id
+        ClassSlug = $Hero.ClassSlug
+
     }
 }
 
-$myObject = [PSCustomObject]@{
+$Matrix = [PSCustomObject]@{
     include = $HeroesParsed
 }
-return ConvertTo-Json  -Compress -InputObject $myObject
-
-
+return ConvertTo-Json  -Compress -InputObject $Matrix
