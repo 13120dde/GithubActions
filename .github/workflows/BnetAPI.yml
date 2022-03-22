@@ -32,8 +32,6 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
-    outputs:
-      character-json: ${{ steps.clean-character-data.outputs.character-json }}
     steps:
         
       - name: Check out repo
@@ -42,8 +40,11 @@ jobs:
       - name: Clean Character Data
         id: clean-character-data
         run: |
-          $CharacterData = ./Scripts/WireCharacterData.ps1 ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}} ${{needs.authenticate-bnet.outputs.access-token }} ${{ matrix.Id }} ${{ matrix.ClassSlug }}
-          echo "::set-output name=character-json::$CharacterData"
+          $CharacterDataJson = ./Scripts/WireCharacterData.ps1 ${{env.ACCOUNT_REGION}} ${{env.GAMER_TAG}} ${{needs.authenticate-bnet.outputs.access-token }} ${{ matrix.Id }} ${{ matrix.ClassSlug }}
+          $CharacterData = ConvertFrom-Json -InputObject $CharacterDataJson
+          cd :c
+          dir
+
 
   process-character-data:
     needs: wire-character-data
@@ -51,5 +52,4 @@ jobs:
     steps:
       - name: Process character Data
         run: |
-            $Json =  ${{needs.wire-character-data.outputs.character-json}}
-            Write-Host $Json
+    
