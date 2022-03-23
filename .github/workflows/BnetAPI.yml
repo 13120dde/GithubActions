@@ -50,7 +50,7 @@ jobs:
           pwd
           mkdir artifacts/characters
           $CurrentDir = Get-Location
-          $FileName = $CurrentDir.ToString()+"artifacts/characters"+$CharacterData.Name+"_"+$CharacterData.Id+".json"
+          $FileName = $CurrentDir.ToString()+"/artifacts/characters/"+$CharacterData.Name+"_"+$CharacterData.Id+".json"
           Write-Host "Writing file : $FileName"
           $CharacterData | ConvertTo-Json -Depth 10 | Out-File $FileName
           dir artifacts/characters
