@@ -81,13 +81,8 @@ jobs:
 
       - name: Select Most Played Character
         run: |
-          pwd
-          dir artifacts/characters
-
-          $CurrentDir = Get-Location
-          $CurrentDirParent = (Get-Item $CurrentDir).Parent.FullName
-
-          $ArtilfactFolder = ${{steps.download-artifacts.outputs.download-path}}
+          
+          $ArtilfactFolder = "${{steps.download-artifacts.outputs.download-path}}\"
           
           Write-Host "Artifact folder: $ArtilfactFolder"
 
