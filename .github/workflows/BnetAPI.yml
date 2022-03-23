@@ -68,7 +68,7 @@ jobs:
     needs: wire-character-data
     runs-on: windows-latest
     outputs:
-      notify-message: ${{steps.select-most-played-character.outputs.notify-message}}
+      notify-message: ${{ steps.select-most-played-character.outputs.notify-message }}
     steps:
         
       - name: Check out repo
@@ -102,7 +102,7 @@ jobs:
           }
 
           Write-Host $HighestHero 
-          $Message = "`n`n### HIGHEST  CHARACTER###`n`n"
+          $Message = "### HIGHEST  CHARACTER###`n`n"
           $Message += "Name: "+$HighestHero.Name+"`n"
           $Message += "Class: "+$HighestHero.Class+"`n"
           $Message += "Elite Kills: "+$HighestHero.EliteKills+"`n`n"
@@ -123,11 +123,11 @@ jobs:
               $Message +="`t"+$Item.Key+": "+$GearSummary+"`n"
           }
           echo "::set-output name=notify-message::$Message"
-          Write-Host "Message: $Message"
+          
           
       - name: Check message
         run: |
-          $Message = ${{steps.select-most-played-character.outputs.notify-message}}
+          $Message = "${{ steps.select-most-played-character.outputs.notify-message }}"
           Write-Host "Message: $Message"
 
   teams-notification:
