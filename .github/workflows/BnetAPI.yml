@@ -124,9 +124,14 @@ jobs:
           }
           echo "::set-output name=teams-notify-message::$Message"
           
+  teams-notification:
+    runs-on: ubuntu-latest
+    needs: process-character-data
+    if: always()
+    steps:
       - name: Notify Teams
         id: notify
         uses: thechetantalwar/teams-notify@v2
         with:
           teams_webhook_url: ${{secrets.TEAMS_NOTIFICATION_WEBHOOK}}
-          message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ steps.select-most-played-character.outputs.teams-notify-message }}."
+          message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.process-character-data.outputs.teams-notify-message }}."
