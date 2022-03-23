@@ -135,14 +135,10 @@ jobs:
     needs: process-character-data
     if: always()
     steps:
-    
-      - name: Check message
-        run: |
-          Write-Host "Message: ${{needs.process-character-data.outputs.notify-message}}"
 
       - name: Notify Teams
         id: notify       
-        uses: thechetantalwar/notify@v2
+        uses: thechetantalwar/teams-notify@v2
         with:
           teams_webhook_url: ${{secrets.TEAMS_NOTIFICATION_WEBHOOK}}
           message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.process-character-data.outputs.notify-message }}."
