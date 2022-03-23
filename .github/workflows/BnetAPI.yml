@@ -67,6 +67,8 @@ jobs:
   process-character-data:
     needs: wire-character-data
     runs-on: windows-latest
+    outputs:
+      teams-notify-message: ${{steps.select-most-played-character.outputs.teams-notify-message}}
     steps:
         
       - name: Check out repo
@@ -80,15 +82,15 @@ jobs:
           path: artifacts/characters
 
       - name: Select Most Played Character
+        id: select-most-played-character
         run: |
           
-          $ArtilfactFolder = "${{steps.download-artifacts.outputs.download-path}}\"
-          
-          Write-Host "Artifact folder: $ArtilfactFolder"
+          $ArtifactFolder = "${{steps.download-artifacts.outputs.download-path}}\"
+          Write-Host "Artifact folder: $ArtifactFolder"
 
           $HighestKills = 0
           $HighestHero = $null
-          foreach($File in Get-ChildItem $ArtilfactFolder)
+          foreach($File in Get-ChildItem $ArtifactFolder)
           {
       
               $Hero = Get-Content -Raw -Path $File.FullName | ConvertFrom-Json
@@ -99,8 +101,32 @@ jobs:
               }
           }
 
-          Write-Host $HighestHero  
-      
-      #${{secrets.TEAMS_NOTIFICATION_WEBHOOK}}
-      # $ArtilfactFolder = $CurrentDirParent.ToString()+"\artifacts\characters\"
-         
+          Write-Host $HighestHero 
+          $Message = "`n`n### HIGHEST  CHARACTER###`n`n"
+          $Message += "Name: "+$HighestHero.Name+"`n"
+          $Message += "Class: "+$HighestHero.Class+"`n"
+          $Message += "Elite Kills: "+$HighestHero.EliteKills+"`n`n"
+          $Message += "Stats: `n"
+
+          $ItemTableRaw =@{}
+          $HighestHero.Stats.psobject.Properties | foreach {$ItemTableRaw[$_.Name] = $_.Value}
+          foreach($Item in $ItemTableRaw.GetEnumerator())
+          {
+              $Message +="`t"+$Item.Key+": "+$Item.Value+"`n"
+          }
+          $Message += "Gear:`n"
+          $ItemTableRaw =@{}
+          $HighestHero.Gear.psobject.Properties | foreach {$ItemTableRaw[$_.Name] = $_.Value}
+          foreach($Item in $ItemTableRaw.GetEnumerator())
+          {
+              $GearSummary = $Item.Value.Name+" - "+$Item.Value.TypeName
+              $Message +="`t"+$Item.Key+": "+$GearSummary+"`n"
+          }
+          echo "::set-output name=teams-notify-message::$Message"
+          
+      - name: Notify Teams
+        id: notify
+        uses: thechetantalwar/teams-notify@v2
+        with:
+          teams_webhook_url: ${{secrets.TEAMS_NOTIFICATION_WEBHOOK}}
+          message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ steps.select-most-played-character.outputs.teams-notify-message }}."
