@@ -54,7 +54,7 @@ jobs:
           $FilePath = $CurrentDir.ToString()+"\artifacts\characters\"
           $FileName = $FilePath+$CharacterData.Name+"_"+$CharacterData.Id+".json"
           Write-Host "Path: $FilePath"
-          $CharacterData | ConvertTo-Json | Out-File $FileName
+          $CharacterData | ConvertTo-Json -Depth 10 | Out-File $FileName
           dir artifacts/characters
 
           echo "::set-output name=file-path::$FilePath"
@@ -73,13 +73,6 @@ jobs:
           path: ${{ steps.clean-character-data.outputs.file-name }}
 
 
-
- # process-character-data:
- #   needs: wire-character-data
- #   runs-on: windows-latest
- #   steps:
- #     - name: Process character Data
- #       run: |
   process-character-data:
     needs: wire-character-data
     runs-on: windows-latest
