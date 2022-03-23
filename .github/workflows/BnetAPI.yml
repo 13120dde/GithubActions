@@ -141,7 +141,8 @@ jobs:
           Write-Host "Message: ${{needs.process-character-data.outputs.notify-message}}"
 
       - name: Notify Teams
-        id:         uses: thechetantalwar/notify@v2
+        id: notify       
+        uses: thechetantalwar/notify@v2
         with:
           teams_webhook_url: ${{secrets.TEAMS_NOTIFICATION_WEBHOOK}}
           message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.process-character-data.outputs.notify-message }}."
