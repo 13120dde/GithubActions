@@ -16,7 +16,6 @@ $Char = [PSCustomObject]@{
 }
 
 $CurrentDir = Get-Location
-Write-Host $FilePath
-$FilePath = $CurrentDir.ToString()+"artifacts/characters/"+$Char.Name+"_"+$Char.Id+".json"
+$FilePath = $CurrentDir.ToString()+"/artifacts/characters/"+$Char.Name+"_"+$Char.Id+".json"
 
 Write-Host $FilePath

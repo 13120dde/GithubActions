@@ -3,6 +3,7 @@ on: push
 env:
   ACCOUNT_REGION: eu
   GAMER_TAG: Brodde#2647
+  ARTIFACT_PATH: \artifacts\characters\
 jobs:
   authenticate-bnet:
     runs-on: windows-latest
@@ -34,7 +35,6 @@ jobs:
       matrix: ${{fromJson(needs.authenticate-bnet.outputs.matrix)}}
       fail-fast: false
     outputs:
-      file-path: ${{ steps.clean-character-data.outputs.file-path }}
       file-name: ${{ steps.clean-character-data.outputs.file-name }}
     steps:
         
@@ -49,27 +49,19 @@ jobs:
           $CharacterData = ConvertFrom-Json -InputObject $CharacterDataJson
          
           pwd
-          mkdir artifacts\characters
+          mkdir ${{ env.ARTIFACT_PATH }}
           $CurrentDir = Get-Location
-          $FilePath = $CurrentDir.ToString()+"\artifacts\characters\"
-          $FileName = $FilePath+$CharacterData.Name+"_"+$CharacterData.Id+".json"
-          Write-Host "Path: $FilePath"
+          $FileName = $CurrentDir.ToString()+"${{ env.ARTIFACT_PATH }}"+$CharacterData.Name+"_"+$CharacterData.Id+".json"
+          Write-Host "Writing file : $FileName"
           $CharacterData | ConvertTo-Json -Depth 10 | Out-File $FileName
           dir artifacts/characters
 
-          echo "::set-output name=file-path::$FilePath"
           echo "::set-output name=file-name::$FileName"
-          
-   #   - run: |
-    #        $FilePath = ${{ steps.clean-character-data.outputs.file-path }}
-     #       $FileName = ${{ steps.clean-character-data.outputs.file-name }}
-      #      Write-Host "filePath: $FilePath"
-       #     Write-Host "fileName: $FileName"
 
       - name: Upload Character Artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: my-artifact
+          name: artifact-characters
           path: ${{ steps.clean-character-data.outputs.file-name }}
 
 
@@ -77,8 +69,15 @@ jobs:
     needs: wire-character-data
     runs-on: windows-latest
     steps:
+
+      - name: Download Character Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: artifact-characters
+          path: ${{ env.ARTIFACT_PATH }}
+
       - name: Process character Data
         run: |
           pwd
-          dir ${{needs.wire-character-data.outputs.file-path}}
+          dir ${{ env.ARTIFACT_PATH }}
       
