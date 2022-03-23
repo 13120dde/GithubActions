@@ -3,7 +3,6 @@ on: push
 env:
   ACCOUNT_REGION: eu
   GAMER_TAG: Brodde#2647
-  ARTIFACT_PATH: "\\artifacts\\characters\\"
 jobs:
   authenticate-bnet:
     runs-on: windows-latest
@@ -49,10 +48,9 @@ jobs:
           $CharacterData = ConvertFrom-Json -InputObject $CharacterDataJson
          
           pwd
-          mkdir ${{ env.ARTIFACT_PATH }}
-          dir artifacts/characters
+          mkdir artifacts/characters
           $CurrentDir = Get-Location
-          $FileName = $CurrentDir.ToString()+"${{ env.ARTIFACT_PATH }}"+$CharacterData.Name+"_"+$CharacterData.Id+".json"
+          $FileName = $CurrentDir.ToString()+"artifacts/characters"+$CharacterData.Name+"_"+$CharacterData.Id+".json"
           Write-Host "Writing file : $FileName"
           $CharacterData | ConvertTo-Json -Depth 10 | Out-File $FileName
           dir artifacts/characters
@@ -75,10 +73,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: artifact-characters
-          path: ${{ env.ARTIFACT_PATH }}
+          path: artifacts/characters
 
       - name: Process character Data
         run: |
           pwd
-          dir ${{ env.ARTIFACT_PATH }}
+          dir artifacts/characters
       
