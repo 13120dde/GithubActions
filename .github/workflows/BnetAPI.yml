@@ -124,11 +124,20 @@ jobs:
           }
           echo "::set-output name=teams-notify-message::$Message"
           
+      - name: Check message
+        run: |
+          Write-Host "Message: ${{steps.select-most-played-character.outputs.teams-notify-message}}"
+
   teams-notification:
     runs-on: ubuntu-latest
     needs: process-character-data
     if: always()
     steps:
+    
+      - name: Check message
+        run: |
+          Write-Host "Message: ${{needs.process-character-data.outputs.teams-notify-message}}"
+
       - name: Notify Teams
         id: notify
         uses: thechetantalwar/teams-notify@v2
