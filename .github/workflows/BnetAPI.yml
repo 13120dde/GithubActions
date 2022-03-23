@@ -68,7 +68,7 @@ jobs:
     needs: wire-character-data
     runs-on: windows-latest
     outputs:
-      teams-notify-message: ${{steps.select-most-played-character.outputs.teams-notify-message}}
+      notify-message: ${{steps.select-most-played-character.outputs.notify-message}}
     steps:
         
       - name: Check out repo
@@ -122,11 +122,13 @@ jobs:
               $GearSummary = $Item.Value.Name+" - "+$Item.Value.TypeName
               $Message +="`t"+$Item.Key+": "+$GearSummary+"`n"
           }
-          echo "::set-output name=teams-notify-message::$Message"
+          echo "::set-output name=notify-message::$Message"
+          Write-Host "Message: $Message"
           
       - name: Check message
         run: |
-          Write-Host "Message: ${{steps.select-most-played-character.outputs.teams-notify-message}}"
+          $Message = ${{steps.select-most-played-character.outputs.notify-message}}
+          Write-Host "Message: $Message"
 
   teams-notification:
     runs-on: ubuntu-latest
@@ -136,11 +138,10 @@ jobs:
     
       - name: Check message
         run: |
-          Write-Host "Message: ${{needs.process-character-data.outputs.teams-notify-message}}"
+          Write-Host "Message: ${{needs.process-character-data.outputs.notify-message}}"
 
       - name: Notify Teams
-        id: notify
-        uses: thechetantalwar/teams-notify@v2
+        id:         uses: thechetantalwar/notify@v2
         with:
           teams_webhook_url: ${{secrets.TEAMS_NOTIFICATION_WEBHOOK}}
-          message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.process-character-data.outputs.teams-notify-message }}."
+          message: "Github Action Build Number ${{ github.run_number }} Completed for ${{ github.repository }} and the outcome is  ${{ needs.process-character-data.outputs.notify-message }}."
