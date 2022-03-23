@@ -3,7 +3,7 @@ on: push
 env:
   ACCOUNT_REGION: eu
   GAMER_TAG: Brodde#2647
-  ARTIFACT_PATH: \artifacts\characters\
+  ARTIFACT_PATH: "\\artifacts\\characters\\"
 jobs:
   authenticate-bnet:
     runs-on: windows-latest
@@ -50,6 +50,7 @@ jobs:
          
           pwd
           mkdir ${{ env.ARTIFACT_PATH }}
+          dir artifacts/characters
           $CurrentDir = Get-Location
           $FileName = $CurrentDir.ToString()+"${{ env.ARTIFACT_PATH }}"+$CharacterData.Name+"_"+$CharacterData.Id+".json"
           Write-Host "Writing file : $FileName"
