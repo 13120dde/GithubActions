@@ -73,6 +73,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Download Character Artifacts
+        id: download-artifacts
         uses: actions/download-artifact@v3
         with:
           name: artifact-characters
@@ -85,7 +86,9 @@ jobs:
 
           $CurrentDir = Get-Location
           $CurrentDirParent = (Get-Item $CurrentDir).Parent.FullName
-          $ArtilfactFolder = $CurrentDirParent.ToString()+"\artifacts\characters\"
+
+          $ArtilfactFolder = ${{steps.download-artifacts.outputs.download-path}}
+          
           Write-Host "Artifact folder: $ArtilfactFolder"
 
           $HighestKills = 0
@@ -103,3 +106,6 @@ jobs:
 
           Write-Host $HighestHero  
       
+      #${{secrets.TEAMS_NOTIFICATION_WEBHOOK}}
+      # $ArtilfactFolder = $CurrentDirParent.ToString()+"\artifacts\characters\"
+         
